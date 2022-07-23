@@ -1,0 +1,32 @@
+.listview{
+    margin: 0;
+    padding: 20px;
+    min-height: 100%;
+    position: relative;
+}
+.listview h3{
+    text-align: right;
+}
+.listview span{
+    display: block;
+    padding: 5px 2px;
+    border-top: 1px solid #666;
+    border-bottom: 1px solid #666;
+    color: #bbb;
+}
+.commentss{
+    padding: 12px 2px;
+    border-bottom: 0.4px solid #666;
+}
+.listview .back{
+    font-size: x-large;
+    padding-top: -5px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    border: 0px;
+    cursor: pointer;
+}
+.icons{
+    margin: 5px;
+}

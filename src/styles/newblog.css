@@ -1,0 +1,41 @@
+.newblog-main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.newblog-main form{
+    width: 100%;
+    padding: 10px;
+    
+}
+.newblog-main input {
+    display: block;
+    width: 90%;
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px auto;
+    border: 0px solid #777;
+    /* border-radius: 5px; */
+}
+.newblog-main textarea{
+    resize: none;
+    display: block;
+    width: 90%;
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px auto;
+    border: 0px solid #777;
+    /* border-radius: 5px; */
+    font-family: inherit;
+}
+.newblog-main button{
+    display: block;
+    text-align: right;
+    font-size: 20px;
+    float: right;
+    margin-right: 12px;
+    padding: 6px 14px;
+    border: 1px solid #777;
+    /* border-radius: 4px; */
+    cursor: pointer;
+}

@@ -1,0 +1,164 @@
+{
+  "profiles": [
+    {
+      "id": 1,
+      "name": "Mercury Doch",
+      "password": "asdf",
+      "followers": [
+        "Nash",
+        "Naomi"
+      ],
+      "following": [
+        "Dag",
+        "Keth"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Venus Zach",
+      "password": "asdf",
+      "followers": [
+        "Mercury",
+        "Naomi"
+      ],
+      "following": [
+        "Vance",
+        "Yomi"
+      ]
+    },
+    {
+      "name": "packom2",
+      "password": "123",
+      "followers": [],
+      "following": [],
+      "id": 3
+    },
+    {
+      "name": "test1",
+      "password": "12345",
+      "followers": [
+        "Mercury",
+        "Nash"
+      ],
+      "following": [
+        "Dag"
+      ],
+      "id": 4
+    },
+    {
+      "name": "Jayus",
+      "password": "icecream",
+      "followers": [],
+      "following": [],
+      "id": 5
+    }
+  ],
+  "blogs": [
+    {
+      "title": "My Zach second Blog",
+      "body": "this is the second blog this is the first blog Topics build upon and support one another in alogical fashion. Groundwork for new concepts and terminology is carefully laid toavoid overwhelming the student and to facilitate self-study.Although quantitative solutions are obviously important a qualitative orintuitive understanding of problems and methods of solution is vital to producingthe insight required to develop sound designs. Therefore whenever possible newconcepts are discussed from a qualitative perspective before quantitative analysisand design are addressed. For example in Chapter 8 the student can simply look atthe root locus and describe qualitatively the changes in transient response that willoccur as a system parameter such as gain is varied. This ability is developed with thehelp of a few simple equations from Chapter 2",
+      "profileId": 2,
+      "id": 1
+    },
+    {
+      "title": "My Zach third Blog",
+      "body": "this is the third blog this is the first blog Topics build upon and support one another in alogical fashion. Groundwork for new concepts and terminology is carefully laid toavoid overwhelming the student and to facilitate self-study.Although quantitative solutions are obviously important a qualitative orintuitive understanding of problems and methods of solution is vital to producingthe insight required to develop sound designs. Therefore whenever possible newconcepts are discussed from a qualitative perspective before quantitative analysisand design are addressed. For example in Chapter 8 the student can simply look atthe root locus and describe qualitatively the changes in transient response that willoccur as a system parameter such as gain is varied. This ability is developed with thehelp of a few simple equations from Chapter 3",
+      "profileId": 1,
+      "id": 2
+    },
+    {
+      "title": "My Zach fifth Blog",
+      "body": "this is the fifth blog this is the first blog Topics build upon and support one another in alogical fashion. Groundwork for new concepts and terminology is carefully laid toavoid overwhelming the student and to facilitate self-study.Although quantitative solutions are obviously important a qualitative orintuitive understanding of problems and methods of solution is vital to producingthe insight required to develop sound designs. Therefore whenever possible newconcepts are discussed from a qualitative perspective before quantitative analysisand design are addressed. For example in Chapter 8 the student can simply look atthe root locus and describe qualitatively the changes in transient response that willoccur as a system parameter such as gain is varied. This ability is developed with thehelp of a few simple equations from Chapter 5",
+      "profileId": 1,
+      "id": 4
+    },
+    {
+      "title": "my Zach sixth blog",
+      "body": "the sixth blog",
+      "profileId": 2,
+      "id": 5
+    },
+    {
+      "title": "my Zach seventh blog",
+      "body": "the seventh blog",
+      "profileId": 2,
+      "id": 6
+    },
+    {
+      "profileId": 2,
+      "title": "another test",
+      "body": "Before you can begin to determine what the composition of a particular paragraph will be, you must first decide on an argument and a working thesis statement for your paper. What is the most important idea that you are trying to convey to your reader? The information in each paragraph must be related to that idea. In other words, your paragraphs should remind your reader that there is a recurrent relationship between your thesis and the information in each paragraph. A working thesis functions like a seed from which your paper, and your ideas, will grow. The whole process is an organic one—a natural progression from a seed to a full-blown paper where there are direct, familial relationships between all of the ideas in the paper.",
+      "id": 8
+    },
+    {
+      "profileId": 4,
+      "title": "first blog",
+      "body": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.\n\nDonations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
+      "id": 9
+    },
+    {
+      "profileId": 4,
+      "title": "second blog",
+      "body": "Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public. We also have thousands of freeCodeCamp study groups around the world.\n\nDonations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.",
+      "id": 10
+    },
+    {
+      "profileId": 5,
+      "title": "Halaand",
+      "body": "Goal",
+      "id": 11
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "the comment for post 1",
+      "blogId": 1
+    },
+    {
+      "id": 2,
+      "body": "the comment for post 4",
+      "blogId": 4
+    },
+    {
+      "id": 5,
+      "body": "the comment for post 2",
+      "blogId": 2
+    },
+    {
+      "body": "your comment here",
+      "blogId": 2,
+      "id": 7
+    },
+    {
+      "body": "third comment",
+      "blogId": 2,
+      "id": 8
+    },
+    {
+      "body": "grfhgfghghghgh",
+      "blogId": 8,
+      "id": 9
+    },
+    {
+      "body": "first comment",
+      "blogId": 2,
+      "id": 10
+    },
+    {
+      "body": "this comment is so biased.. ugh :<",
+      "blogId": 10,
+      "id": 11
+    },
+    {
+      "body": "asdfghjkwertyui",
+      "blogId": 4,
+      "id": 12
+    },
+    {
+      "body": "Fior",
+      "blogId": 11,
+      "id": 13
+    }
+  ]
+}
