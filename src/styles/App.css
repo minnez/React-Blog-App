@@ -26,9 +26,53 @@
 }
 .middle{
   overflow-y: scroll;
-  border-right: 1px solid #777;
-  border-left: 1px solid #777;
+  border-right: 0.1px solid #777;
+  border-left: 0.1px solid #777;
 }
+.insidehome{
+  position: relative;
+  height: 100%;
+}
+.insidehome .addpost{
+  position: sticky;
+  bottom: 40px;
+  left: 100%;
+  margin-right: 40px;
+  z-index: 4;
+  cursor: pointer;
+  background-color: coral;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid coral;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+}
+.insidehome .addpost::before{
+    content: "+";
+    height:40px;
+    width:40px;
+    font-size:40px;
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    font-weight:500;
+    font-family:courier;
+    color:#fff;
+}
+/* .new{
+  z-index: 5;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding-top: 40px;
+  background-color: rgba(0, 0, 0, 0.214);
+} */
 /* Hide scrollbar for Chrome, Safari and Opera */
 .middle::-webkit-scrollbar {
   display: none;

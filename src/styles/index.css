@@ -15,7 +15,6 @@ h1 {
 a{
   font-size: 18px;
   text-decoration: none;
-  padding: 5px 20px;
 }
 li{
   list-style: none;
@@ -32,7 +31,7 @@ li{
   border-bottom: 1px solid #777;
 }
 .navbar .links{
-  margin-left: 60px;
+  margin-left: 40px;
 }
 .navbar h1{
   margin-left: -60px;

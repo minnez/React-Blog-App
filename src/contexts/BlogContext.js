@@ -3,7 +3,7 @@ import React, { createContext, useEffect, useState } from 'react';
 export const BlogContext = createContext();
 
 const BlogContextProvider = (prop) => {
-    const [books, setBooks] = useState([])
+    const [blogs, setBooks] = useState([])
     const [name, setName] = useState("")
     const [following, setFollowing] = useState([])
     const [followers, setFollowers] = useState([])
@@ -30,7 +30,7 @@ const BlogContextProvider = (prop) => {
     
 
     return ( 
-        <BlogContext.Provider value={{books,name,following,followers}}>
+        <BlogContext.Provider value={{blogs,name,following,followers}}>
             {prop.children}
         </BlogContext.Provider>
      );

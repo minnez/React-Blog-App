@@ -8,6 +8,7 @@ import ThemeContextProvider from './contexts/ThemeContext';
 import Authenticate from './Authenticate';
 import Login from './views/Login'
 import SignUp from './views/SignUp'
+import Newblog from './views/Newblog'
 import UsercontextProvider from './contexts/Usercontext';
 
 
@@ -23,6 +24,7 @@ function App() {
                   <Route path='/signup' element={<SignUp/>}/>
                   <Route element={<Authenticate/>}>
                     <Route exact path='/' element={<Home/>}/>
+                    <Route exact path='/addblog' element={<Newblog/>}/>
                     <Route exact path='/listview/:id' element={<Listview/>}/>
                     <Route exact path='/aboutview' element={<Aboutview/>}/>
                     <Route exact path='/contactview' element={<Contactview/>}/>

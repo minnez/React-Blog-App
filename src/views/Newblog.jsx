@@ -28,13 +28,14 @@ const Newblog = () => {
             setisPending(false)
         })
     }
+
+    const goback = () =>{
+        navigate(-1)
+    }
     return ( 
         <div className="newblog-main"style={{backgroundColor: theme.drop, color: theme.syntax}}>
+            <button onClick={goback} style={{backgroundColor: theme.drop, color: theme.syntax}} className='back'>&times;</button>
             <form onSubmit={handleSubmit}>
-                {/* <input type="text" 
-                value={profileId}
-                onChange={(e) => setId(e.target.value)} 
-                placeholder='user id' required style={{backgroundColor: theme.bg, color: theme.syntax}}/> */}
                 <input type="text" 
                 style={{backgroundColor: theme.bg, color: theme.syntax}}
                 placeholder="Blog title"

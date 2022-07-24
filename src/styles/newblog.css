@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    padding-top: 50px;
 }
 .newblog-main form{
     width: 100%;
@@ -37,5 +39,14 @@
     padding: 6px 14px;
     border: 1px solid #777;
     /* border-radius: 4px; */
+    cursor: pointer;
+}
+.newblog-main .back{
+    font-size:40px;
+    padding-top: -5px;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    border: 0px;
     cursor: pointer;
 }

@@ -79,16 +79,28 @@
       "id": 5
     },
     {
+      "title": "my Zach sixth blog",
+      "body": "the sixth blog",
+      "profileId": 2,
+      "id": 6
+    },
+    {
+      "title": "my Zach sixth blog",
+      "body": "the sixth blog",
+      "profileId": 2,
+      "id": 7
+    },
+    {
       "title": "my Zach seventh blog",
       "body": "the seventh blog",
       "profileId": 2,
-      "id": 6
+      "id": 8
     },
     {
       "profileId": 2,
       "title": "another test",
       "body": "Before you can begin to determine what the composition of a particular paragraph will be, you must first decide on an argument and a working thesis statement for your paper. What is the most important idea that you are trying to convey to your reader? The information in each paragraph must be related to that idea. In other words, your paragraphs should remind your reader that there is a recurrent relationship between your thesis and the information in each paragraph. A working thesis functions like a seed from which your paper, and your ideas, will grow. The whole process is an organic one—a natural progression from a seed to a full-blown paper where there are direct, familial relationships between all of the ideas in the paper.",
-      "id": 8
+      "id": 12
     },
     {
       "profileId": 4,
@@ -107,6 +119,12 @@
       "title": "Halaand",
       "body": "Goal",
       "id": 11
+    },
+    {
+      "profileId": 2,
+      "title": "new blog after refactor",
+      "body": "this piece of blog was added after the code was changed",
+      "id": 13
     }
   ],
   "comments": [
