@@ -3,10 +3,10 @@ import React, { createContext, useEffect, useState } from 'react';
 export const BlogContext = createContext();
 
 const BlogContextProvider = (prop) => {
-    const [blogs, setBooks] = useState([])
-    const [name, setName] = useState("")
-    const [following, setFollowing] = useState([])
-    const [followers, setFollowers] = useState([])
+    const [blogs, setBooks] = useState([{title:"title",id:9001,body:"initializing"}])
+    const [name, setName] = useState("rick")
+    const [following, setFollowing] = useState(['an','af'])
+    const [followers, setFollowers] = useState(['an'])
     const userId = sessionStorage.getItem("currentuser")
 
     useEffect(()=>{
@@ -20,7 +20,6 @@ const BlogContextProvider = (prop) => {
                 })
                 .then(data => {
                     setBooks(data.blogs);
-                    console.log(data.blogs)
                     setName(data.name)
                     setFollowers(data.followers)
                     setFollowing(data.following)
@@ -30,7 +29,7 @@ const BlogContextProvider = (prop) => {
     
 
     return ( 
-        <BlogContext.Provider value={{blogs,name,following,followers}}>
+        <BlogContext.Provider value={{blogs,name,following,followers,userId}}>
             {prop.children}
         </BlogContext.Provider>
      );

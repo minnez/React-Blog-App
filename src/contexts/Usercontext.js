@@ -15,7 +15,7 @@ const UsercontextProvider = (prop) => {
             })
             .then(data => {
                 setProfiles(data);
-                console.log(data)
+                // console.log(data)
             })
     },[])
     

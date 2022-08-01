@@ -1,0 +1,23 @@
+.user-main{
+    width: 90%;
+    display: flex;
+    padding: 10px;
+    /* border-bottom: 1px solid #ccc; */
+}
+.user-main span{
+    width: 75%;
+
+}
+.user-main button{
+    padding: 6px 20px;
+    background-color: transparent;
+    border: 1px solid coral;
+    color: coral;
+    font-size: 14px;
+    border-radius: 16px;
+    letter-spacing: 1px;
+}
+.user-main button:hover{
+    background-color: coral;
+    color: #fff;
+}

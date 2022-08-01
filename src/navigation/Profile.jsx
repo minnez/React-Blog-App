@@ -9,6 +9,9 @@ const Profile = () => {
     const theme = isLightTheme ? light : dark;
 
     const {name, following, followers } = useContext(BlogContext)
+    console.log(name)
+    console.log(following)
+    console.log(followers)
     const navigate = useNavigate()
 
 

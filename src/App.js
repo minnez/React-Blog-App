@@ -5,7 +5,7 @@ import Listview from './views/Listview';
 import Aboutview from './views/Aboutview';
 import Contactview from './views/Contactview';
 import ThemeContextProvider from './contexts/ThemeContext';
-import Authenticate from './Authenticate';
+import Authenticated from './Authenticated';
 import Login from './views/Login'
 import SignUp from './views/SignUp'
 import Newblog from './views/Newblog'
@@ -22,7 +22,7 @@ function App() {
                 <Routes >
                   <Route path='/login' element={<Login/>}/>
                   <Route path='/signup' element={<SignUp/>}/>
-                  <Route element={<Authenticate/>}>
+                  <Route element={<Authenticated/>}>
                     <Route exact path='/' element={<Home/>}/>
                     <Route exact path='/addblog' element={<Newblog/>}/>
                     <Route exact path='/listview/:id' element={<Listview/>}/>

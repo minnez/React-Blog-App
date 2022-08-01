@@ -9,7 +9,7 @@ const Booklist = (prop) => {
     const [author,setAuthor] = useState()
 
     useEffect(()=>{
-        fetch('http://localhost:8000/profiles/'+prop.author)
+        fetch('http://localhost:8000/profiles/'+prop.authorid)
             .then(res =>{
                 if(!res.ok){
                     throw Error('could not fetch the data for that resource');
@@ -19,7 +19,7 @@ const Booklist = (prop) => {
             .then(data => {
                 setAuthor(data.name)
             })
-    },[prop.author])
+    },[prop.authorid])
 
     return (
         <Link className="booka" to={"/listview/"+prop.id}  state={{author}}>

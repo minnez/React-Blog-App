@@ -34,7 +34,7 @@ const Comments = ({close, blogid}) => {
     return ( 
         <div className="comments">
             <form onSubmit={handlesubmit} style={{backgroundColor: theme.bg, color: theme.syntax}}>
-                <button className="close" onClick={close}style={{backgroundColor: theme.bg, color: theme.syntax}}>&times;</button>
+                <button data-testid="closecomment" className="close" onClick={close}style={{backgroundColor: theme.bg, color: theme.syntax}}>&times;</button>
                  <textarea 
                  style={{backgroundColor: theme.drop, color: theme.syntax}}
                  required  
