@@ -34,7 +34,7 @@ const Newblog = () => {
     }
     return ( 
         <div className="newblog-main"style={{backgroundColor: theme.drop, color: theme.syntax}}>
-            <button onClick={goback} style={{backgroundColor: theme.drop, color: theme.syntax}} className='back'>&times;</button>
+            <button data-testid="closenewblog" onClick={goback} style={{backgroundColor: theme.drop, color: theme.syntax}} className='back'>&times;</button>
             <form onSubmit={handleSubmit}>
                 <input type="text" 
                 style={{backgroundColor: theme.bg, color: theme.syntax}}

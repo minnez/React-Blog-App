@@ -69,8 +69,18 @@ const Listview = () => {
             <h2>{ blog.title }</h2>
             <p>{ blog.body }</p>
             <h3>{ location.state.author }</h3>
-            <IconButton sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} className='iconss' onClick={handlecomment} size='medium'><CommentOutlinedIcon fontSize='medium'></CommentOutlinedIcon></IconButton>
-            <IconButton sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} className='iconss' onClick={handledelete} size='medium'><DeleteOutlinedIcon fontSize='medium'></DeleteOutlinedIcon></IconButton>
+            <IconButton 
+                sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} 
+                className='iconss' onClick={handlecomment}
+                 size='medium'>
+                    <CommentOutlinedIcon fontSize='medium'></CommentOutlinedIcon>
+            </IconButton>
+            <IconButton 
+                sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} 
+                className='iconss' onClick={handledelete} 
+                size='medium'>
+                    <DeleteOutlinedIcon fontSize='medium'></DeleteOutlinedIcon>
+            </IconButton>
             { comment && <Modal
             open={comment}
             onClose={handlecomment}
