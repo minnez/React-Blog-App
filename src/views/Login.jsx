@@ -10,43 +10,29 @@ const Login = () => {
     const { isLightTheme, light, dark, toggletheme } = useContext(ThemeContext)
     const theme  = isLightTheme ? light : dark;
 
-    const {profiles} = useContext(Usercontext)
+    const {signIn} = useContext(Usercontext)
 
     const navigate = useNavigate()
-    const[username,setUsername] = useState('')
+    const[email,setEmail] = useState('')
     const[password,setPassword] = useState('')
+    const[error, setError] = useState()
     const[isPending, setisPending] = useState(false)
 
     
 
-    const handlelogin = (e) =>{
+    const handlelogin = async (e) =>{
         e.preventDefault();
         setisPending(true)
-        // mocking the backend authentication
-        let userlist = []
-        profiles.forEach(profile => {
-            // pushes all names of users into an array for easier checking
-            userlist.push(profile.name)
-        });
-        if(userlist.includes(username)){
-            profiles.forEach(profile => {
-                if(profile.name === username){
-                    if(profile.password === password){
-                        console.log('logged in')
-                        // setting the user id into the session storage as a token
-                        sessionStorage.setItem("currentuser",profile.id)
-                        navigate('/')
-                        setisPending(false)
-                    }else{
-                        alert('incorrect password')
-                        setisPending(false)
-                    }
-                }
-            });
-        }else{
-            setisPending(false)
-            alert('user not found. Please sign up to be a member')
+        setError('')
+        try{
+            await signIn(email, password)
+            navigate('/')
+            console.log("logged in")
+        }catch (e){
+            setError(e.message)
+            console.log(e.message)
         }
+
     }
 
     return (  
@@ -57,13 +43,13 @@ const Login = () => {
             </IconButton>
             <h2>Login here</h2>
             <form style={{backgroundColor: theme.bg, color: theme.syntax}}>
-                <label htmlFor="username">Name</label>
+                <label htmlFor="email">Email</label>
                 <input 
-                    type="text" id='username' 
-                    placeholder="your name" 
+                    type="text" id='email' 
+                    placeholder="your email" 
                     style={{backgroundColor: theme.bg, color: theme.syntax}}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     required />
                 <label htmlFor="pwd">Password</label>
                 <input 

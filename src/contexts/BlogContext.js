@@ -1,35 +1,31 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
+import { Usercontext } from '../contexts/Usercontext';
+import { db } from "../firebase-config"
+import { collection, getDocs } from "firebase/firestore"
 
 export const BlogContext = createContext();
 
 const BlogContextProvider = (prop) => {
-    const [blogs, setBooks] = useState([{title:"title",id:9001,body:"initializing"}])
-    const [name, setName] = useState("rick")
-    const [following, setFollowing] = useState(['an','af'])
-    const [followers, setFollowers] = useState(['an'])
-    const userId = sessionStorage.getItem("currentuser")
+    const {profile} = useContext(Usercontext)
+    const [blogs, setBlogs] = useState([{title:"title",id:9001,body:"initializing"}])
+    const blogCollectionRef = collection(db, "blogs")
 
+
+    const getPosts = async () => {
+        const data = await getDocs(blogCollectionRef)
+        // console.log(data.docs)
+        setBlogs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
+    }
     useEffect(()=>{
-        if(userId){
-            fetch('http://localhost:8000/profiles/'+userId+'?_embed=blogs')
-                .then(res =>{
-                    if(!res.ok){
-                        throw Error('could not fetch the data for that resource');
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    setBooks(data.blogs);
-                    setName(data.name)
-                    setFollowers(data.followers)
-                    setFollowing(data.following)
-                })
+        
+        if(profile){
+            getPosts();
         }
-    },[userId])
+    })
     
 
     return ( 
-        <BlogContext.Provider value={{blogs,name,following,followers,userId}}>
+        <BlogContext.Provider value={{blogs, getPosts}}>
             {prop.children}
         </BlogContext.Provider>
      );

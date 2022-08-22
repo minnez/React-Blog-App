@@ -1,41 +1,45 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../contexts/ThemeContext';
+import { Usercontext } from '../contexts/Usercontext';
 import { useContext,useState } from 'react';
 import { IconButton } from '@mui/material';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
 import '../styles/login.css'
+
 const SignUp = () => {
     const { isLightTheme, light, dark, toggletheme } = useContext(ThemeContext)
     const theme  = isLightTheme ? light : dark;
+    const {createUser, writeUserData } = useContext(Usercontext)
 
     const navigate = useNavigate()
+    const[email, setEmail] = useState('')
     const[name,setUsername] = useState('')
     const[password,setPassword] = useState('')
     const[confirmpassword,setcpassword] = useState('')
-    const[following] = useState([])
-    const[followers] = useState([])
+    const[error, setError] = useState('')
     const[isPending, setisPending] = useState(false)
 
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault();
+       
+        setError('')
         if(password !== confirmpassword){
-            alert('password mismatch')
-            return
+            console.log("password mismatch")
+            alert("password mismatch")
+        }else{
+            try{
+                await createUser(email, password)
+                await writeUserData( name, email)
+                console.log("signed up")
+                navigate('/')
+            } catch(e){
+                setError(e.message)
+                console.log(e.message)
+            }
         }
-        const profile = { name, password,followers,following};
-        setisPending(true)
-        
-        fetch("http://localhost:8000/profiles",{
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(profile)
-        }).then(() => {
-            console.log('new profile added')
-            navigate("/login")
-            setisPending(false)
-        })
+
     }
 
 
@@ -47,10 +51,18 @@ const SignUp = () => {
             </IconButton>
             <h2>Sign Up</h2>
             <form style={{backgroundColor: theme.bg, color: theme.syntax}}>
+                <label htmlFor="email">Name</label>
+                <input 
+                    type="email" id='email' 
+                    placeholder="your email" 
+                    style={{backgroundColor: theme.bg, color: theme.syntax}}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required />
                 <label htmlFor="username">Name</label>
                 <input 
                     type="text" id='username' 
-                    placeholder="your name" 
+                    placeholder="your username" 
                     style={{backgroundColor: theme.bg, color: theme.syntax}}
                     value={name}
                     onChange={(e) => setUsername(e.target.value)}

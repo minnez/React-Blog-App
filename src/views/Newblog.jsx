@@ -1,32 +1,42 @@
 import { ThemeContext } from "../contexts/ThemeContext";
+import { Usercontext } from "../contexts/Usercontext";
+import { BlogContext } from "../contexts/BlogContext";
 import { useContext, useState } from "react";
 import '../styles/newblog.css'
 import { useNavigate } from "react-router-dom";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase-config"
+import { useEffect } from "react";
 
 const Newblog = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
+    const { getPosts } = useContext(BlogContext)
+    const {profile} = useContext(Usercontext)
 
     const navigate = useNavigate()
-    const profileId = Number(sessionStorage.getItem("currentuser"))
+    const [profileID,setprofileID] = useState()
     const[title,setTitle] = useState('')
     const[body,setBody] = useState('')
     const[isPending, setisPending] = useState(false)
 
-    const handleSubmit = (e) =>{
+    const blogsCollectionRef = collection(db, "blogs");
+
+    useEffect(()=>{
+        setprofileID(profile.uid)
+    },[profile])
+
+    const handleSubmit = async(e) =>{
         e.preventDefault();
-        const blog = { profileId, title, body };
+        const blog = { profileID, title, body };
         setisPending(true)
         
-        fetch("http://localhost:8000/blogs",{
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(blog)
-        }).then(() => {
-            console.log('new blog added')
-            navigate(0)
-            setisPending(false)
-        })
+        await addDoc(blogsCollectionRef, blog)
+        setisPending(false)
+        getPosts()
+        console.log("blog added")
+        setBody("")
+        setTitle("")
     }
 
     const goback = () =>{
@@ -48,7 +58,7 @@ const Newblog = () => {
                  required  
                  value={body}
                  onChange={(e) => setBody(e.target.value)}
-                 placeholder='your blog here'  
+                 placeholder='add a new blog'  
                  cols="30" rows="12"
                  ></textarea>
                   {!isPending && <button style={{backgroundColor: theme.bg, color: theme.syntax}}>post</button>}

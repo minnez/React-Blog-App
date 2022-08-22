@@ -1,34 +1,32 @@
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext, useState } from "react";
 import '../styles/comment.css'
-import { useNavigate } from "react-router-dom";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "../firebase-config"
 
-const Comments = ({close, blogid}) => {
-    const navigate = useNavigate()
+const Comments = ({close, blogid, fetchComments}) => {
     const[body,setBody] = useState('')
-    const[blogId,setblogid] = useState(Number(blogid))
+    const[blogID] = useState(blogid)
     const[isPending, setisPending] = useState(false)
+
+    const commentsCollectionRef = collection(db, "comments");
+
 
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
 
-    const handlesubmit = (e) =>{
-        setblogid(blogid)
-        console.log('commented')
+    const handlesubmit = async(e) =>{
         e.preventDefault();
-        const blog = { body, blogId };
+        const comment = { body, blogID };
         setisPending(true)
+
+        await addDoc(commentsCollectionRef, comment)
+        setisPending(false)
+        console.log("comment added")
+        setBody("")        
         
-        fetch("http://localhost:8000/comments",{
-            method: 'POST',
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(blog)
-        }).then(() => {
-            console.log('new blog added')
-            setisPending(false)
-            navigate(0)
-            close()
-        })
+        fetchComments()
+        close()
     }
 
     return ( 

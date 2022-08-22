@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { ThemeContext } from "../contexts/ThemeContext";
+import { BlogContext } from "../contexts/BlogContext";
 import { useParams } from 'react-router-dom'
 import '../styles/listview.css'
 import { IconButton } from '@mui/material';
@@ -9,15 +10,18 @@ import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Comments from '../components/Comment';
+import { getDoc, getDocs, doc, collection, query, where, deleteDoc } from "firebase/firestore";
+import { db } from "../firebase-config";
 
 const Listview = () => {
     const navigate = useNavigate()
-    let location = useLocation()// use to get state from previous link
 
     // variables or states used
     const { id } = useParams()
     const[blog, setBlog] = useState([])
+    const[blogComments, setblogComments] = useState([])
     const[comment,setComment] = useState(false)
+
 
     const style = {
         position: 'absolute',
@@ -33,42 +37,59 @@ const Listview = () => {
 
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
-
+    const { getPosts } = useContext(BlogContext)
     const goback = () =>{
         navigate(-1)
     }
     const handlecomment = () =>{
         setComment(!comment)
     }
-    const handledelete = () =>{
-        fetch('http://localhost:8000/blogs/'+id,{
-            method:'DELETE'
-        }).then(() =>{
-            console.log("deleted")
-            navigate(-1)
-        })
+    const handledelete = async() =>{
+        const docRef = doc(db, "blogs", id);
+        await deleteDoc(docRef)
+        console.log("blog deleted")
+
+        // deleting all comments under deleted post
+        if(blogComments){
+            blogComments.forEach((comment)=>{
+                const commentRef = doc(db, "comments", comment.id);
+                deleteDoc(commentRef)
+            })
+        }
+        getPosts()
+        navigate(-1)
+    }
+    const fetchBlog = async () =>{
+        const docRef = doc(db, "blogs", id);
+        const docSnap = await getDoc(docRef);
+        if (docSnap.exists()) {
+            setBlog(docSnap.data())
+        } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+        }
+    }
+    const fetchComments = async () => {
+        const commentsRef = collection(db, "comments");
+        const q = await query(commentsRef, where("blogID", "==", id));
+        const querySnapshot = await getDocs(q);
+        setblogComments(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
     }
 
-    useEffect(()=>{
-
+    useEffect(()=> async()=>{
         //fetch request to get posts and comments
-        const fetchBlog = async () =>{
-            const res = await fetch('http://localhost:8000/blogs/'+id+'?_embed=comments')
-                if(!res.ok){
-                    throw Error('could not fetch the data for that resource');
-                }
-                setBlog( await res.json())
-        }
         fetchBlog()
+        fetchComments()
             
-    },[id,blog.profileId])
+    })
+    
 
     return ( 
         <div className='listview'style={{backgroundColor: theme.drop, color: theme.syntax}}>
             <button onClick={goback} style={{backgroundColor: theme.drop, color: theme.syntax}} className='back'>&larr;</button>
             <h2>{ blog.title }</h2>
             <p>{ blog.body }</p>
-            <h3>{ location.state.author }</h3>
+            {/* <h3>{ location.state.author }</h3> */}
             <IconButton 
                 sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} 
                 className='iconss' onClick={handlecomment}
@@ -88,13 +109,13 @@ const Listview = () => {
             aria-describedby="modal-modal-description"
             >
             <Box sx={style}>
-                <Comments blogid={id} close={handlecomment}/>
+                <Comments fetchComments={fetchComments} blogid={id} close={handlecomment}/>
             </Box>
             </Modal>}
 
             <span>comments</span>
-            {blog.comments && blog.comments.map(comment =>(//checks if theres comments before rendering the comments
-                <p className='commentss' key={comment.id}>{ comment.body }</p>
+            {blogComments && blogComments.map((comment, index) =>(//checks if theres comments before rendering the comments
+                <p className='commentss' key={index}>{ comment.body }</p>
             ))}
         </div>
      );

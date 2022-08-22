@@ -4,15 +4,16 @@ import Profile from './navigation/Profile';
 import Navbar from './navigation/Navbar';
 import SearchUser from "./navigation/SearchUser";
 import BlogContextProvider from './contexts/BlogContext';
+import { Usercontext } from '../src/contexts/Usercontext';
 import { ThemeContext } from "./contexts/ThemeContext";
 
 const Authenticate = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
+    const {profile} = useContext(Usercontext)
 
     const location = useLocation()
-    const token = sessionStorage.getItem("currentuser")
-    let auth = {'token':token}
+    let auth = {'token':profile}
     return ( 
         <BlogContextProvider>
             { auth.token ? 

@@ -9,16 +9,16 @@ const Booklist = (prop) => {
     const [author,setAuthor] = useState()
 
     useEffect(()=>{
-        fetch('http://localhost:8000/profiles/'+prop.authorid)
-            .then(res =>{
-                if(!res.ok){
-                    throw Error('could not fetch the data for that resource');
-                }
-                return res.json();
-            })
-            .then(data => {
-                setAuthor(data.name)
-            })
+        // fetch('http://localhost:8000/profiles/'+prop.authorid)
+        //     .then(res =>{
+        //         if(!res.ok){
+        //             throw Error('could not fetch the data for that resource');
+        //         }
+        //         return res.json();
+        //     })
+        //     .then(data => {
+        //         setAuthor(data.name)
+        //     })
     },[prop.authorid])
 
     return (
