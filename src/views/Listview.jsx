@@ -64,6 +64,7 @@ const Listview = () => {
         const docRef = doc(db, "blogs", id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
+            console.log("setting blog")
             setBlog(docSnap.data())
         } else {
             // doc.data() will be undefined in this case
@@ -74,6 +75,7 @@ const Listview = () => {
         const commentsRef = collection(db, "comments");
         const q = await query(commentsRef, where("blogID", "==", id));
         const querySnapshot = await getDocs(q);
+        console.log("setting comments")
         setblogComments(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
     }
 
