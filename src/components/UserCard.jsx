@@ -8,7 +8,6 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
     const UserCard = ({ pid, pname }) => {
 
     const {profile,fetchProfileDetails,profileDetails} = useContext(Usercontext)
-    // const { followers, userId, name } = useContext(BlogContext)
 
     console.log("usercard.js")
 

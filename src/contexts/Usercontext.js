@@ -44,15 +44,22 @@ const UsercontextProvider = (prop) => {
     }
 
     const fetchProfileDetails = async () =>{
-        const docRef = doc(db, "profiles", auth.currentUser.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            setProfileDetails(docSnap.data())
+        try {
+            const docRef = doc(db, "profiles", auth.currentUser.uid);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                setProfileDetails(docSnap.data())
+                
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
             
-        } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+        } catch (error) {
+            console.log(error.message)
         }
+
+        
     }
 
     useEffect(()=>{

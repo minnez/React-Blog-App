@@ -4,11 +4,13 @@ import Newblog from '../views/Newblog'
 import ThemeContextProvider from '../contexts/ThemeContext';
 import { useContext } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
+import { BlogContext } from "../contexts/BlogContext";
 import { BrowserRouter } from 'react-router-dom';
 
 const MockedComponent = () =>{
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
+    const { getPosts } = useContext(BlogContext)
 
     return (
         <BrowserRouter>
