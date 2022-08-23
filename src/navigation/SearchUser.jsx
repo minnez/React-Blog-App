@@ -18,35 +18,40 @@ const SearchUser = () => {
     const {profileDetails, profile} = useContext(Usercontext)
     const [profiles, setProfiles] = useState([])
     const profilesCollectionRef = collection(db, "profiles")
+    const [error, setError] = useState()
 
 
     const getAllProfiles = async () => {
-        const data = await getDocs(profilesCollectionRef)
-        const userprofiles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id}))
-        //get all the following of user
-        // console.log(profileDetails.following)
-        let isFollowing = [];
-
-        //filter out all the following from the list of all users and store in isFollowing
-        profileDetails.following.filter(user=>isFollowing.push(user.id))
-        console.log("is following",isFollowing)
-        console.log("all profiles",userprofiles)
-        console.log("profiledetails",profileDetails)
+        try {
+            const data = await getDocs(profilesCollectionRef)
+            const userprofiles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id}))
+            //get all the following of user
         
-        //remove current user form list of all users and store rest in notFollowed
-        const profilesExceptUser = userprofiles.filter(userprofile => userprofile.id !== profile.uid )
-        console.log("profilesExceptuser",profilesExceptUser)
-        const notFollowed = profilesExceptUser.filter(profile => {
-            if (!isFollowing.includes(profile.id)) {
-                return profile
-            }
-        })
-        console.log("reached here")
-        console.log("notfollowed",notFollowed)
-        setProfiles(notFollowed)
+            let isFollowing = [];
+
+            //filter out all the following from the list of all users and store in isFollowing
+            profileDetails.following.filter(user=>isFollowing.push(user.id))
+            console.log("is following",isFollowing)
+            console.log("all profiles",userprofiles)
+            console.log("profiledetails",profileDetails)
+            
+            //remove current user form list of all users and store rest in notFollowed
+            const profilesExceptUser = userprofiles.filter(userprofile => userprofile.id !== profile.uid )
+            console.log("profilesExceptuser",profilesExceptUser)
+            const notFollowed = profilesExceptUser.filter(profile => {
+                if (!isFollowing.includes(profile.id)) {
+                    return profile
+                }
+            })
+            setProfiles(notFollowed)
+            
+        } catch (error) {
+            setError(error.message)
+        }
+
+        
     }
     useEffect(()=>{
-        console.log("searchuser.js")
         getAllProfiles();
     },[profileDetails])
 
