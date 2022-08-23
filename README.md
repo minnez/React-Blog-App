@@ -1,7 +1,7 @@
 # Ackom Patrick (computer 4)
 # index number : 3577518
 
-# Getting Started with Create React App
+# Blog App made with React and Firebase with user following and followers feature
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -17,10 +17,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
-
-### `npx json-server --watch data/db.json --port 8000`
-
-Runs the local server for the backend using the jason server api
 
 ### `npm test`
 
