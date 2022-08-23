@@ -87,7 +87,7 @@ const Listview = () => {
         fetchBlog()
         fetchComments()
             
-    },[id])
+    },[])
     
 
     return ( 
