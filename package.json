@@ -1,6 +1,6 @@
 {
   "name": "context-app",
-  "homepage": ".",
+  "homepage": "https://main--minnez-blog-app.netlify.app/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
