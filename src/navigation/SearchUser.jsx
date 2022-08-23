@@ -1,21 +1,54 @@
 import '../styles/searchuser.css'
 
+import { db } from "../firebase-config"
+import { getDocs, collection } from "firebase/firestore"
+
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from '../contexts/Usercontext';
-import { BlogContext } from '../contexts/BlogContext';
-import { useContext } from "react";
+import { useContext, useState, useEffect } from "react";
 import UserCard from '../components/UserCard';
+
+
+
 
 const SearchUser = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
 
-    // const { profiles } = useContext(Usercontext)
-    // const { name, following } = useContext(BlogContext)
-    // following.push(name)// Adds the username of current user to omit it from the list
-    // console.log(following)
-    // const notFollowing = profiles.filter(profile => !following.includes(profile.name))//filtered based on already followed users
-    // console.log(notFollowing)
+    const {profileDetails, profile} = useContext(Usercontext)
+    const [profiles, setProfiles] = useState([])
+    const profilesCollectionRef = collection(db, "profiles")
+
+
+    const getAllProfiles = async () => {
+        const data = await getDocs(profilesCollectionRef)
+        const userprofiles = data.docs.map((doc) => ({ ...doc.data(), id: doc.id}))
+        //get all the following of user
+        // console.log(profileDetails.following)
+        let isFollowing = [];
+
+        //filter out all the following from the list of all users and store in isFollowing
+        profileDetails.following.filter(user=>isFollowing.push(user.id))
+        console.log("is following",isFollowing)
+        console.log("all profiles",userprofiles)
+        console.log("profiledetails",profileDetails)
+        
+        //remove current user form list of all users and store rest in notFollowed
+        const profilesExceptUser = userprofiles.filter(userprofile => userprofile.id !== profile.uid )
+        console.log("profilesExceptuser",profilesExceptUser)
+        const notFollowed = profilesExceptUser.filter(profile => {
+            if (!isFollowing.includes(profile.id)) {
+                return profile
+            }
+        })
+        console.log("reached here")
+        console.log("notfollowed",notFollowed)
+        setProfiles(notFollowed)
+    }
+    useEffect(()=>{
+        console.log("searchuser.js")
+        getAllProfiles();
+    },[profileDetails])
 
     return ( 
         <div className='main'style={{backgroundColor: theme.drop, color: theme.syntax}}>
@@ -24,13 +57,13 @@ const SearchUser = () => {
                 <input type="search" placeholder='search for a user' style={{backgroundColor: theme.bg, color: theme.syntax}}/>
                 <button>Search</button>
             </form>
-            {/* <div style={{width:"90%", maxWidth:'400px'}} >
+            <div style={{width:"90%", maxWidth:'400px'}} >
                 <p>list of some members over here</p>
-                {!notFollowing ?<div>No one to follow now</div> :
-                    notFollowing.map(profile =>(
-                        <UserCard key={profile.id} pid={profile.id} pname={profile.name}/>
+                {!profiles ?<div>loading...</div> :
+                    profiles.map(profiles =>(
+                        <UserCard key={profiles.id} pid={profiles.id} pname={profiles.username}/>
                 ))}
-            </div> */}
+            </div>
         </div>
      );
 }

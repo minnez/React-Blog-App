@@ -19,6 +19,7 @@ const Login = () => {
     const[isPending, setisPending] = useState(false)
 
     
+    console.log("login.js")
 
     const handlelogin = async (e) =>{
         e.preventDefault();
@@ -31,6 +32,7 @@ const Login = () => {
         }catch (e){
             setError(e.message)
             console.log(e.message)
+            setisPending(false)
         }
 
     }

@@ -8,10 +8,11 @@ const Home = () => {
     const { blogs } = useContext(BlogContext)
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
-    const [blogss, setBooks] = useState([])
+    const [blogss, setBlogs] = useState([])
 
     useEffect(() =>{
-        setBooks(blogs)
+        console.log("home.js")
+        setBlogs(blogs)
     },[blogs])
 
 

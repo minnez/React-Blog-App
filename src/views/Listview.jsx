@@ -78,10 +78,11 @@ const Listview = () => {
 
     useEffect(()=> async()=>{
         //fetch request to get posts and comments
+        console.log("listview.js")
         fetchBlog()
         fetchComments()
             
-    })
+    },[id])
     
 
     return ( 

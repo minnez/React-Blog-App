@@ -17,11 +17,12 @@ const BlogContextProvider = (prop) => {
         setBlogs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
     }
     useEffect(()=>{
+        console.log("blogcontext.js")
         
         if(profile){
             getPosts();
         }
-    })
+    },[db])
     
 
     return ( 

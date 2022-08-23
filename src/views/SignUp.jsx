@@ -7,6 +7,7 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
 import '../styles/login.css'
 
+
 const SignUp = () => {
     const { isLightTheme, light, dark, toggletheme } = useContext(ThemeContext)
     const theme  = isLightTheme ? light : dark;
@@ -20,6 +21,7 @@ const SignUp = () => {
     const[error, setError] = useState('')
     const[isPending, setisPending] = useState(false)
 
+    console.log("signup.js")
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -51,7 +53,7 @@ const SignUp = () => {
             </IconButton>
             <h2>Sign Up</h2>
             <form style={{backgroundColor: theme.bg, color: theme.syntax}}>
-                <label htmlFor="email">Name</label>
+                <label htmlFor="email">Email</label>
                 <input 
                     type="email" id='email' 
                     placeholder="your email" 

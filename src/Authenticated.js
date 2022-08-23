@@ -11,6 +11,7 @@ const Authenticate = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
     const {profile} = useContext(Usercontext)
+    console.log("authenticated.js")
 
     const location = useLocation()
     let auth = {'token':profile}

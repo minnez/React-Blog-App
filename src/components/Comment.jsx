@@ -11,6 +11,7 @@ const Comments = ({close, blogid, fetchComments}) => {
 
     const commentsCollectionRef = collection(db, "comments");
 
+    console.log("comment.js")
 
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;

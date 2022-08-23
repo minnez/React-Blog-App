@@ -23,6 +23,7 @@ const Newblog = () => {
     const blogsCollectionRef = collection(db, "blogs");
 
     useEffect(()=>{
+        console.log("newblog.js")
         setprofileID(profile.uid)
     },[profile])
 
