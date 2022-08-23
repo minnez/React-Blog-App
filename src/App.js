@@ -13,7 +13,6 @@ import UsercontextProvider from './contexts/Usercontext';
 
 
 function App() {
-        console.log("app.js")
   return (
     <Router>
       <div className="App">

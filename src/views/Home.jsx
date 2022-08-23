@@ -11,7 +11,7 @@ const Home = () => {
     const [blogss, setBlogs] = useState([])
 
     useEffect(() =>{
-        console.log("home.js")
+        // console.log("home.js")
         setBlogs(blogs)
     },[blogs])
 

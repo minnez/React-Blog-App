@@ -8,7 +8,7 @@ import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
 const Navbar = () => {
     const { isLightTheme, light, dark,toggletheme } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
-    console.log("navigation.js")
+    // console.log("navigation.js")
 
 
     return ( 

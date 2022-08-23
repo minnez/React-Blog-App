@@ -10,6 +10,7 @@ const Profile = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
     const {logout,profile,fetchProfileDetails,profileDetails,setUser} = useContext(Usercontext)
+    const [error, setError] = useState()
 
     const navigate = useNavigate()
 
@@ -18,14 +19,14 @@ const Profile = () => {
         try{
             await logout();
             navigate('/login');
-            console.log("you are logged out")
+            // console.log("you are logged out")
         }catch (e) {
-            console.log(e.message)
+            setError(e.message)
         }
     }
 
     useEffect(()=> {
-        console.log("profile.jsx")
+        // console.log("profile.jsx")
         fetchProfileDetails()
     },[profile.uid])
 
@@ -37,7 +38,6 @@ const Profile = () => {
                     <div className="profile-img">
                         <img width="80" src={Image} alt="efdffefdef" />
                     </div>
-                    {/* {setUser(profileDetails.username)} */}
                     <h3 className="profile-name" >{profileDetails.username}</h3>
                     <div className="profile-email">{profileDetails.email}</div>
                     <div className='fol'>

@@ -11,7 +11,7 @@ const Comments = ({close, blogid, fetchComments}) => {
 
     const commentsCollectionRef = collection(db, "comments");
 
-    console.log("comment.js")
+    // console.log("comment.js")
 
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
@@ -23,7 +23,7 @@ const Comments = ({close, blogid, fetchComments}) => {
 
         await addDoc(commentsCollectionRef, comment)
         setisPending(false)
-        console.log("comment added")
+        // console.log("comment added")
         setBody("")        
         
         fetchComments()

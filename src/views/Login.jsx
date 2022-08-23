@@ -19,7 +19,7 @@ const Login = () => {
     const[isPending, setisPending] = useState(false)
 
     
-    console.log("login.js")
+    // console.log("login.js")
 
     const handlelogin = async (e) =>{
         e.preventDefault();
@@ -28,10 +28,10 @@ const Login = () => {
         try{
             await signIn(email, password)
             navigate('/')
-            console.log("logged in")
+            // console.log("logged in")
         }catch (e){
             setError(e.message)
-            console.log(e.message)
+            // console.log(e.message)
             setisPending(false)
         }
 

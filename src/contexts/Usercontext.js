@@ -14,6 +14,7 @@ const UsercontextProvider = (prop) => {
     const [profile, setProfile] = useState({})
     const [currentUserName, setCurrentUserName] = useState()
     const [profileDetails, setProfileDetails] = useState()
+    const [error, setError] = useState()
 
     const createUser = (email, password) =>{
         return createUserWithEmailAndPassword(auth, email, password)
@@ -28,12 +29,11 @@ const UsercontextProvider = (prop) => {
     }
 
     const setUser = (name) =>{
-        console.log("setting name")
+        // console.log("setting name")
         setCurrentUserName(name)
     }
     
     const writeUserData = async( name, email) => {
-        console.log("writing")
         await setDoc(doc(db, "profiles", auth.currentUser.uid), {
             username: name,
             email: email,
@@ -52,20 +52,20 @@ const UsercontextProvider = (prop) => {
                 
             } else {
                 // doc.data() will be undefined in this case
-                console.log("No such document!");
+                setError("No such document!");
             }
             
         } catch (error) {
-            console.log(error.message)
+            setError(error.message)
         }
 
         
     }
 
     useEffect(()=>{
-        console.log("usercontext.js")
+        // console.log("usercontext.js")
         const unsubscribe = onAuthStateChanged(auth, (currentuser) =>{
-            console.log(currentuser);
+            // console.log(currentuser);
             setProfile(currentuser)
         });
         return () => {

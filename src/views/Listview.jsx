@@ -21,6 +21,7 @@ const Listview = () => {
     const[blog, setBlog] = useState([])
     const[blogComments, setblogComments] = useState([])
     const[comment,setComment] = useState(false)
+    const[error, setError] = useState()
 
 
     const style = {
@@ -47,7 +48,7 @@ const Listview = () => {
     const handledelete = async() =>{
         const docRef = doc(db, "blogs", id);
         await deleteDoc(docRef)
-        console.log("blog deleted")
+        // console.log("blog deleted")
 
         // deleting all comments under deleted post
         if(blogComments){
@@ -66,7 +67,7 @@ const Listview = () => {
             setBlog(docSnap.data())
         } else {
             // doc.data() will be undefined in this case
-            console.log("No such document!");
+            setError("No such document!");
         }
     }
     const fetchComments = async () => {
@@ -78,7 +79,7 @@ const Listview = () => {
 
     useEffect(()=> async()=>{
         //fetch request to get posts and comments
-        console.log("listview.js")
+        // console.log("listview.js")
         fetchBlog()
         fetchComments()
             

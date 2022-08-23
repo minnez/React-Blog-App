@@ -9,7 +9,7 @@ const Booklist = (prop) => {
     const [author,setAuthor] = useState()
 
     useEffect(()=>{
-        console.log("book.js")
+        // console.log("book.js")
     },[prop.authorid])
 
     return (

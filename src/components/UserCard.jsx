@@ -9,7 +9,7 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
     const {profile,fetchProfileDetails,profileDetails} = useContext(Usercontext)
 
-    console.log("usercard.js")
+    // console.log("usercard.js")
 
     const[isfollowed,setfollowed] = useState(false)
     const handlefollow = async() =>{
@@ -17,14 +17,14 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 
         const followRef = doc(db, "profiles", profile.uid);
         // Atomically add a new follow to the "following" array field.
-        console.log("name",pname, "id",pid)
+        // console.log("name",pname, "id",pid)
         await updateDoc(followRef, {
             following: arrayUnion({ id: pid, name: pname })
         });
 
         const followerRef = doc(db, "profiles", pid);
         // Atomically add a new follower to the "followers" of the user's array field.
-        console.log(profile.uid, profileDetails.username)
+        // console.log(profile.uid, profileDetails.username)
         await updateDoc(followerRef, {
             followers: arrayUnion({ id: profile.uid, name: profileDetails.username })
         });

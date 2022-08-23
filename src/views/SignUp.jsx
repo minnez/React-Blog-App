@@ -21,7 +21,7 @@ const SignUp = () => {
     const[error, setError] = useState('')
     const[isPending, setisPending] = useState(false)
 
-    console.log("signup.js")
+    // console.log("signup.js")
 
     const handleSubmit = async (e) =>{
         e.preventDefault();
@@ -34,11 +34,11 @@ const SignUp = () => {
             try{
                 await createUser(email, password)
                 await writeUserData( name, email)
-                console.log("signed up")
+                // console.log("signed up")
                 navigate('/')
             } catch(e){
                 setError(e.message)
-                console.log(e.message)
+                // console.log(e.message)
             }
         }
 

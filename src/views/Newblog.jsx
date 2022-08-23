@@ -23,7 +23,7 @@ const Newblog = () => {
     const blogsCollectionRef = collection(db, "blogs");
 
     useEffect(()=>{
-        console.log("newblog.js")
+        // console.log("newblog.js")
         setprofileID(profile.uid)
     },[profile])
 
@@ -35,7 +35,7 @@ const Newblog = () => {
         await addDoc(blogsCollectionRef, blog)
         setisPending(false)
         getPosts()
-        console.log("blog added")
+        // console.log("blog added")
         setBody("")
         setTitle("")
     }
