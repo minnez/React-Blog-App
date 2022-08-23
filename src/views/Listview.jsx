@@ -61,6 +61,7 @@ const Listview = () => {
         navigate(-1)
     }
     const fetchBlog = async () =>{
+        console.log("entered fetch blog")
         const docRef = doc(db, "blogs", id);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
@@ -72,6 +73,7 @@ const Listview = () => {
         }
     }
     const fetchComments = async () => {
+        console.log("entered fetch comment")
         const commentsRef = collection(db, "comments");
         const q = await query(commentsRef, where("blogID", "==", id));
         const querySnapshot = await getDocs(q);
@@ -81,7 +83,7 @@ const Listview = () => {
 
     useEffect(()=> async()=>{
         //fetch request to get posts and comments
-        // console.log("listview.js")
+        console.log("listview.js")
         fetchBlog()
         fetchComments()
             
