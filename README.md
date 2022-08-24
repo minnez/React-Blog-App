@@ -6,7 +6,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## this project has been deployed to :
-https://630611ffdc191b034ba09404--sage-souffle-9b4cd9.netlify.app/#/login
+https://main--minnez-blogs.netlify.app/#/login
 and
 https://square-limit-1741.on.fleek.co/#/login
 
