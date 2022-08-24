@@ -63,11 +63,11 @@ const Listview = () => {
         navigate(-1)
     }
     const fetchBlog = async () =>{
-        console.log("entered fetch blog")
+        // console.log("entered fetch blog")
         const docRef = doc(db, "blogs", oneblogId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
-            console.log("setting blog")
+            // console.log("setting blog")
             setBlog(docSnap.data())
         } else {
             // doc.data() will be undefined in this case
@@ -75,17 +75,17 @@ const Listview = () => {
         }
     }
     const fetchComments = async () => {
-        console.log("entered fetch comment")
+        // console.log("entered fetch comment")
         const commentsRef = collection(db, "comments");
         const q = await query(commentsRef, where("blogID", "==", oneblogId));
         const querySnapshot = await getDocs(q);
-        console.log("setting comments")
+        // console.log("setting comments")
         setblogComments(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
     }
 
-    useEffect(()=> async()=>{
+    useEffect(()=>{
         //fetch request to get posts and comments
-        console.log("listview.js")
+        // console.log("listview.js")
         fetchBlog()
         fetchComments()
             
