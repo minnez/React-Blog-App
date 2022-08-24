@@ -1,5 +1,5 @@
 import { useEffect, useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { ThemeContext } from "../contexts/ThemeContext";
 import { BlogContext } from "../contexts/BlogContext";
 import { useParams } from 'react-router-dom'
@@ -15,9 +15,11 @@ import { db } from "../firebase-config";
 
 const Listview = () => {
     const navigate = useNavigate()
+    const location = useLocation()
+    const { oneblogId } = location.state
 
     // variables or states used
-    const { id } = useParams()
+    // const { id } = useParams()
     const[blog, setBlog] = useState([])
     const[blogComments, setblogComments] = useState([])
     const[comment,setComment] = useState(false)
@@ -46,7 +48,7 @@ const Listview = () => {
         setComment(!comment)
     }
     const handledelete = async() =>{
-        const docRef = doc(db, "blogs", id);
+        const docRef = doc(db, "blogs", oneblogId);
         await deleteDoc(docRef)
         // console.log("blog deleted")
 
@@ -62,7 +64,7 @@ const Listview = () => {
     }
     const fetchBlog = async () =>{
         console.log("entered fetch blog")
-        const docRef = doc(db, "blogs", id);
+        const docRef = doc(db, "blogs", oneblogId);
         const docSnap = await getDoc(docRef);
         if (docSnap.exists()) {
             console.log("setting blog")
@@ -75,7 +77,7 @@ const Listview = () => {
     const fetchComments = async () => {
         console.log("entered fetch comment")
         const commentsRef = collection(db, "comments");
-        const q = await query(commentsRef, where("blogID", "==", id));
+        const q = await query(commentsRef, where("blogID", "==", oneblogId));
         const querySnapshot = await getDocs(q);
         console.log("setting comments")
         setblogComments(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id})))
@@ -115,7 +117,7 @@ const Listview = () => {
             aria-describedby="modal-modal-description"
             >
             <Box sx={style}>
-                <Comments fetchComments={fetchComments} blogid={id} close={handlecomment}/>
+                <Comments fetchComments={fetchComments} blogid={oneblogId} close={handlecomment}/>
             </Box>
             </Modal>}
 

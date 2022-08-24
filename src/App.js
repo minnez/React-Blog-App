@@ -14,18 +14,18 @@ import UsercontextProvider from './contexts/Usercontext';
 
 function App() {
   return (
-    <Router>
+    <Router >
       <div className="App">
         <div>
         <ThemeContextProvider>
             <UsercontextProvider>
-                <Routes >
+                <Routes basename="/minnez-blog-app.netlify.app" >
                   <Route path='/login' element={<Login/>}/>
                   <Route path='/signup' element={<SignUp/>}/>
                   <Route element={<Authenticated/>}>
                     <Route exact path='/' element={<Home/>}/>
                     <Route exact path='/addblog' element={<Newblog/>}/>
-                    <Route exact path='/listview/:id' element={<Listview/>}/>
+                    <Route path='/listview/:id' element={<Listview/>}/>
                     <Route exact path='/aboutview' element={<Aboutview/>}/>
                     <Route exact path='/contactview' element={<Contactview/>}/>
                   </Route>

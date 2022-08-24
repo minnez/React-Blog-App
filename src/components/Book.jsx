@@ -13,7 +13,7 @@ const Booklist = (prop) => {
     },[prop.authorid])
 
     return (
-        <Link className="booka" to={"/listview/"+prop.id}  state={{author}}>
+        <Link className="booka" to={"/listview/"+prop.id}  state={{oneblogId : prop.id}}>
             <div className="book" style={{backgroundColor: theme.bg, color: theme.syntax}}>
                 <h3>{ prop.title }</h3>
                 <p>{ prop.body.substring(0,100)+"  . . ." }</p>
