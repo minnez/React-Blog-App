@@ -84,7 +84,7 @@ const Listview = () => {
                 <button onClick={goback} style={{backgroundColor: theme.drop, color: theme.syntax}} className='back'>&larr;</button>
                 <h2>{ blogTitle }</h2>
                 <p>{ blogBody }</p>
-                <Link to={"/aboutprofile/"+ownerId}>
+                <Link className='underline' to={"/aboutprofile/"+ownerId}>
                     <div className='ownername'>{ author }</div>
                 </Link>
                 <IconButton 
@@ -116,7 +116,7 @@ const Listview = () => {
             {(blogComments.length > 0) && blogComments.map((comment, index) =>(//checks if theres comments before rendering the comments
                 <div className='commentss' key={index}>
                     <p>{ comment.body }</p>
-                    <Link to={"/aboutprofile/"+comment.profileID}>
+                    <Link className='underline' to={"/aboutprofile/"+comment.profileID}>
                         <div className='ownername'>{comment.profileName}</div>
                     </Link>
                 </div>

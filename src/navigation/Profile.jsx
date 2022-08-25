@@ -38,7 +38,7 @@ const Profile = () => {
                     <div className="profile-img">
                         <img width="80" src={Image} alt="efdffefdef" />
                     </div>
-                    <Link to={"/aboutprofile/"+profileDetails.userId}>
+                    <Link className="underline" to={"/aboutprofile/"+profileDetails.userId}>
                         <h3 className="profile-name" >{profileDetails.username}</h3>
                     </Link>
                     <div className="profile-email">{profileDetails.email}</div>

@@ -41,6 +41,8 @@ const Newblog = () => {
         // console.log("blog added")
         setBody("")
         setTitle("")
+        navigate(-1)
+
     }
 
     const goback = () =>{

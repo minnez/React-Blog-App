@@ -32,8 +32,10 @@ const SignUp = () => {
             alert("password mismatch")
         }else{
             try{
+                setisPending(true)
                 await createUser(email, password)
                 await writeUserData( name, email)
+                setisPending(false)
                 // console.log("signed up")
                 navigate('/')
             } catch(e){

@@ -20,7 +20,6 @@
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
-    color: #bbb;
     gap: 10px;
     font-size: 14px;
 }
@@ -44,7 +43,6 @@
 }
 .folNum{
     background-color: #b8b5b575;
-    color: #333;
     padding: 4px;
     border-radius: 4px;
     font-size: 16px;
