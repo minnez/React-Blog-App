@@ -6,9 +6,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## this project has been deployed to :
-https://main--minnez-blogs.netlify.app/#/login
+https://minnezblogs.netlify.app
 and
-https://square-limit-1741.on.fleek.co/#/login
+https://minnezblog.on.fleek.co
 
 
 ## Available Scripts
