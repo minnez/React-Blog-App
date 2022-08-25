@@ -1,8 +1,7 @@
 import { useEffect, useState, useContext } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import { ThemeContext } from "../contexts/ThemeContext";
 import { BlogContext } from "../contexts/BlogContext";
-import { useParams } from 'react-router-dom'
 import '../styles/listview.css'
 import { IconButton } from '@mui/material';
 import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
@@ -10,21 +9,23 @@ import CommentOutlinedIcon from '@mui/icons-material/CommentOutlined';
 import Modal from '@mui/material/Modal';
 import Box from '@mui/material/Box';
 import Comments from '../components/Comment';
-import { getDoc, getDocs, doc, collection, query, where, deleteDoc } from "firebase/firestore";
+import { getDocs, doc, collection, query, where, deleteDoc } from "firebase/firestore";
 import { db } from "../firebase-config";
+import { Usercontext } from '../contexts/Usercontext';
 
 const Listview = () => {
     const navigate = useNavigate()
     const location = useLocation()
-    const { oneblogId } = location.state
+    const { oneblogId, blogTitle, blogBody, ownerId, author } = location.state
 
-    // variables or states used
-    // const { id } = useParams()
-    const[blog, setBlog] = useState([])
     const[blogComments, setblogComments] = useState([])
     const[comment,setComment] = useState(false)
     const[error, setError] = useState()
-
+    
+    const { isLightTheme, light, dark } = useContext(ThemeContext)
+    const theme = isLightTheme ? light : dark;
+    const { getPosts } = useContext(BlogContext)
+    const { profile } = useContext(Usercontext)
 
     const style = {
         position: 'absolute',
@@ -38,9 +39,6 @@ const Listview = () => {
         p: 4,
     };
 
-    const { isLightTheme, light, dark } = useContext(ThemeContext)
-    const theme = isLightTheme ? light : dark;
-    const { getPosts } = useContext(BlogContext)
     const goback = () =>{
         navigate(-1)
     }
@@ -62,18 +60,7 @@ const Listview = () => {
         getPosts()
         navigate(-1)
     }
-    const fetchBlog = async () =>{
-        // console.log("entered fetch blog")
-        const docRef = doc(db, "blogs", oneblogId);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-            // console.log("setting blog")
-            setBlog(docSnap.data())
-        } else {
-            // doc.data() will be undefined in this case
-            setError("No such document!");
-        }
-    }
+
     const fetchComments = async () => {
         // console.log("entered fetch comment")
         const commentsRef = collection(db, "comments");
@@ -84,46 +71,55 @@ const Listview = () => {
     }
 
     useEffect(()=>{
-        //fetch request to get posts and comments
+        //fetch request to get comments
         // console.log("listview.js")
-        fetchBlog()
         fetchComments()
             
-    },[])
+    },[oneblogId])
     
 
     return ( 
         <div className='listview'style={{backgroundColor: theme.drop, color: theme.syntax}}>
-            <button onClick={goback} style={{backgroundColor: theme.drop, color: theme.syntax}} className='back'>&larr;</button>
-            <h2>{ blog.title }</h2>
-            <p>{ blog.body }</p>
-            {/* <h3>{ location.state.author }</h3> */}
-            <IconButton 
-                sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} 
-                className='iconss' onClick={handlecomment}
-                 size='medium'>
-                    <CommentOutlinedIcon fontSize='medium'></CommentOutlinedIcon>
-            </IconButton>
-            <IconButton 
-                sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} 
-                className='iconss' onClick={handledelete} 
-                size='medium'>
-                    <DeleteOutlinedIcon fontSize='medium'></DeleteOutlinedIcon>
-            </IconButton>
-            { comment && <Modal
-            open={comment}
-            onClose={handlecomment}
-            aria-labelledby="modal-modal-title"
-            aria-describedby="modal-modal-description"
-            >
-            <Box sx={style}>
-                <Comments fetchComments={fetchComments} blogid={oneblogId} close={handlecomment}/>
-            </Box>
-            </Modal>}
+            <div className='listview-child'>
+                <button onClick={goback} style={{backgroundColor: theme.drop, color: theme.syntax}} className='back'>&larr;</button>
+                <h2>{ blogTitle }</h2>
+                <p>{ blogBody }</p>
+                <Link to={"/aboutprofile/"+ownerId}>
+                    <div className='ownername'>{ author }</div>
+                </Link>
+                <IconButton 
+                    sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} 
+                    className='iconss' onClick={handlecomment}
+                    size='medium'>
+                        <CommentOutlinedIcon fontSize='medium'></CommentOutlinedIcon>
+                </IconButton>
+                {(profile.uid === ownerId) && <IconButton 
+                    sx={{backgroundColor: theme.drop, color: theme.syntax, margin:'5px'}} 
+                    className='iconss' onClick={handledelete} 
+                    size='medium'>
+                        <DeleteOutlinedIcon fontSize='medium'></DeleteOutlinedIcon>
+                </IconButton>}
+                { comment && <Modal
+                open={comment}
+                onClose={handlecomment}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+                >
+                <Box sx={style}>
+                    <Comments fetchComments={fetchComments} blogid={oneblogId} close={handlecomment}/>
+                </Box>
+                </Modal>}
+            </div>
 
-            <span>comments</span>
-            {blogComments && blogComments.map((comment, index) =>(//checks if theres comments before rendering the comments
-                <p className='commentss' key={index}>{ comment.body }</p>
+            <span className='comment-title'>comments</span>
+            {!(blogComments.length > 0) && <div style={{padding:"20px", color: "#ccc"}}>No comments yet</div>}
+            {(blogComments.length > 0) && blogComments.map((comment, index) =>(//checks if theres comments before rendering the comments
+                <div className='commentss' key={index}>
+                    <p>{ comment.body }</p>
+                    <Link to={"/aboutprofile/"+comment.profileID}>
+                        <div className='ownername'>{comment.profileName}</div>
+                    </Link>
+                </div>
             ))}
         </div>
      );

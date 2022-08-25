@@ -58,8 +58,6 @@ const UsercontextProvider = (prop) => {
         } catch (error) {
             setError(error.message)
         }
-
-        
     }
 
     useEffect(()=>{

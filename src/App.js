@@ -26,7 +26,7 @@ function App() {
                     <Route exact path='/' element={<Home/>}/>
                     <Route exact path='/addblog' element={<Newblog/>}/>
                     <Route path='/listview/:id' element={<Listview/>}/>
-                    <Route exact path='/aboutview' element={<Aboutview/>}/>
+                    <Route exact path='/aboutprofile/:id' element={<Aboutview/>}/>
                     <Route exact path='/contactview' element={<Contactview/>}/>
                   </Route>
                 </Routes>

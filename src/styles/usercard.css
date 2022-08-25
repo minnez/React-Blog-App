@@ -1,5 +1,6 @@
 .user-main{
-    width: 90%;
+    width: 100%;
+    max-width: 200px;
     display: flex;
     padding: 10px;
     /* border-bottom: 1px solid #ccc; */

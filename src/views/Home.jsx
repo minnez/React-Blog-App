@@ -20,7 +20,7 @@ const Home = () => {
         <div className="insidehome">
             <div style={{backgroundColor: theme.drop, paddingTop:'3px',minHeight:'100%'}}>
                 { blogss.map((blog)=>(
-                    <Book key={blog.id} title={blog.title} body={blog.body} id={blog.id} authorid={blog.profileId}/>
+                    <Book key={blog.id} title={blog.title} body={blog.body} id={blog.id} authorid={blog.profileID} author={blog.profileName}/>
                 ))}
             </div>
             <Link className="addpost" to="/addblog"> </Link>

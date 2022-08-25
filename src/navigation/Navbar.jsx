@@ -20,7 +20,6 @@ const Navbar = () => {
             <h1>Blogs</h1>
             <div className="links">
                 <Link style={{color:theme.syntax,marginLeft:"20px"}} to="/">Home</Link>
-                <Link style={{color:theme.syntax,marginLeft:"20px"}} to="/aboutview">About</Link>
                 <Link style={{color:theme.syntax,marginLeft:"20px"}} to="/contactview">Contact</Link>
             </div>
         </div>

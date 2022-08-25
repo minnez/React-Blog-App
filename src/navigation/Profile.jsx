@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import '../styles/profile.css'
 import Image from "../images/pp2.jpg";
 import { Usercontext } from "../contexts/Usercontext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 const Profile = () => {
@@ -38,7 +38,9 @@ const Profile = () => {
                     <div className="profile-img">
                         <img width="80" src={Image} alt="efdffefdef" />
                     </div>
-                    <h3 className="profile-name" >{profileDetails.username}</h3>
+                    <Link to={"/aboutprofile/"+profileDetails.userId}>
+                        <h3 className="profile-name" >{profileDetails.username}</h3>
+                    </Link>
                     <div className="profile-email">{profileDetails.email}</div>
                     <div className='fol'>
                         <div><span className="folNum">{profileDetails.following.length}</span> following</div>

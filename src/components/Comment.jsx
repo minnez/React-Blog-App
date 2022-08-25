@@ -1,5 +1,6 @@
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useContext, useState } from "react";
+import { Usercontext } from "../contexts/Usercontext";
+import { useContext, useState, useEffect } from "react";
 import '../styles/comment.css'
 import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase-config"
@@ -8,6 +9,8 @@ const Comments = ({close, blogid, fetchComments}) => {
     const[body,setBody] = useState('')
     const[blogID] = useState(blogid)
     const[isPending, setisPending] = useState(false)
+    const [profileID,setprofileID] = useState()
+    const [profileName, setProfileName] = useState()
 
     const commentsCollectionRef = collection(db, "comments");
 
@@ -15,10 +18,11 @@ const Comments = ({close, blogid, fetchComments}) => {
 
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
+    const {profile, profileDetails} = useContext(Usercontext)
 
     const handlesubmit = async(e) =>{
         e.preventDefault();
-        const comment = { body, blogID };
+        const comment = { body, blogID, profileID, profileName };
         setisPending(true)
 
         await addDoc(commentsCollectionRef, comment)
@@ -29,6 +33,11 @@ const Comments = ({close, blogid, fetchComments}) => {
         fetchComments()
         close()
     }
+
+    useEffect(()=>{
+        setprofileID(profile.uid)
+        setProfileName(profileDetails.username)
+    },[profile])
 
     return ( 
         <div className="comments">

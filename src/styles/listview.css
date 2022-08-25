@@ -1,21 +1,28 @@
 .listview{
     margin: 0;
-    padding: 20px;
+    padding: 0px;
     min-height: 100%;
+    padding-bottom: 20px;
     position: relative;
 }
-.listview h3{
-    text-align: right;
+.listview-child{
+    padding: 20px 20px 0px 20px;
 }
-.listview span{
+.listview .ownername{
+    text-align: right;
+    font-size:medium;
+    color: #aaa;
+}
+.listview .comment-title{
     display: block;
-    padding: 5px 2px;
+    padding: 5px 20px;
     border-top: 1px solid #666;
     border-bottom: 1px solid #666;
     color: #bbb;
 }
 .commentss{
-    padding: 12px 2px;
+    padding: 12px;
+    /* margin: 4px; */
     border-bottom: 0.4px solid #666;
 }
 .listview .back{

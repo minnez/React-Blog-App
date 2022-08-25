@@ -12,10 +12,11 @@ const Newblog = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
     const { getPosts } = useContext(BlogContext)
-    const {profile} = useContext(Usercontext)
+    const {profile, profileDetails} = useContext(Usercontext)
 
     const navigate = useNavigate()
     const [profileID,setprofileID] = useState()
+    const [profileName, setProfileName] = useState()
     const[title,setTitle] = useState('')
     const[body,setBody] = useState('')
     const[isPending, setisPending] = useState(false)
@@ -25,11 +26,13 @@ const Newblog = () => {
     useEffect(()=>{
         // console.log("newblog.js")
         setprofileID(profile.uid)
+        // console.log(profileDetails.username)
+        setProfileName(profileDetails.username)
     },[profile])
 
     const handleSubmit = async(e) =>{
         e.preventDefault();
-        const blog = { profileID, title, body };
+        const blog = { profileID, title, body, profileName };
         setisPending(true)
         
         await addDoc(blogsCollectionRef, blog)

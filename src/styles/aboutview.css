@@ -1,0 +1,62 @@
+.aboutview-main{
+    position: relative;
+}
+
+.about-profile{
+    padding:40px  25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.about-profile-picture{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid gray;
+}
+.about-name-email{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.about-name-email .name{
+    font-size: 1.5rem;
+    padding: 5px;
+    font-weight: 700;
+}
+.about-name-email .email{
+    padding: 5px;
+    font-weight: 300;
+}
+.about-follows{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.f-n{
+    display: inline-block;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.f-l{
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 300;
+}
+.back{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    cursor: pointer;
+    border-color: transparent;
+}
+.loading{
+    height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

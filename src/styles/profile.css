@@ -12,6 +12,8 @@
     border: 3px solid #000;
     border-radius: 50%;
     overflow: hidden;
+    position: relative;
+    left: 10px;
 }
 .fol{
     width: 100%;
