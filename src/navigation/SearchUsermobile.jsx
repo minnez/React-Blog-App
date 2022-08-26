@@ -3,6 +3,8 @@ import '../styles/searchusermobile.css'
 import { db } from "../firebase-config"
 import { getDocs, collection } from "firebase/firestore"
 
+import { IconButton } from '@mui/material';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from '../contexts/Usercontext';
 import { useContext, useState, useEffect } from "react";
@@ -57,7 +59,10 @@ const SearchUser = ({close}) => {
 
     return ( 
         <div className='mmain'style={{backgroundColor: theme.drop, color: theme.syntax}}>
-            <button onClick={()=>close(false)} className="mclose">close</button>
+            <IconButton onClick={()=>close(false)} sx={{backgroundColor: theme.bg, color: theme.ui, margin:'5px'}}size='medium' >
+                <CloseOutlinedIcon  sx={{color: theme.syntax}} fontSize='medium'></CloseOutlinedIcon> 
+            </IconButton>
+            {/* <button onClick={()=>close(false)} className="mclose">close</button> */}
             <span>Search</span>
             <form >
                 <input type="search" placeholder='search for a user' style={{backgroundColor: theme.bg, color: theme.syntax}}/>

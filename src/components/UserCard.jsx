@@ -53,8 +53,8 @@ import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
     return ( 
         <div className="user-main">
             <span>{ pname }</span>
-            {!isfollowed && <button onClick={handlefollow}>follow</button>}
-            {isfollowed && <button onClick={handleunfollow}>following</button>}
+            {!isfollowed && <button className="follow-btn" onClick={handlefollow}>follow</button>}
+            {isfollowed && <button className="follow-btn" onClick={handleunfollow}>following</button>}
         </div>
      );
 }

@@ -9,7 +9,7 @@
     width: 75%;
 
 }
-.user-main button{
+.user-main .follow-btn{
     padding: 6px 20px;
     background-color: transparent;
     border: 1px solid coral;

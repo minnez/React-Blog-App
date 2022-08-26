@@ -2,6 +2,8 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext, useEffect, useState } from "react";
 import '../styles/profilemobile.css'
 import Image from "../images/pp2.jpg";
+import { IconButton } from '@mui/material';
+import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { Usercontext } from "../contexts/Usercontext";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -32,7 +34,9 @@ const Profile = ({close}) => {
 
     return ( 
         <div className="mprofile-main" style={{backgroundColor: theme.drop, color: theme.syntax}}>
-            <button onClick={()=>close(false)} className="mclose">close</button>
+            <IconButton onClick={()=>close(false)} sx={{backgroundColor: theme.bg, color: theme.ui, margin:'5px'}}size='medium' >
+                <CloseOutlinedIcon  sx={{color: theme.syntax}} fontSize='medium'></CloseOutlinedIcon> 
+            </IconButton>
             {!profileDetails && <span>loading...</span>}
             {profileDetails && (
                 <div className="mmm">

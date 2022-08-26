@@ -18,7 +18,7 @@ const Authenticate = () => {
     return ( 
         <BlogContextProvider>
             { auth.token ? 
-            <div className='grid-3-col'>
+            <div className='grid-3-col'style={{backgroundColor: theme.drop}}>
                 <Navbar/>
                 <Profile/>
                 <div style={{backgroundColor: theme.drop}} className='middle'>

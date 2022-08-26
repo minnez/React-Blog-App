@@ -64,8 +64,26 @@ li{
 .book li{
   font-size: 20px;
 }
-@media only screen and (min-width: 700px) {
+.menu{
+  display: none !important;
+}
+@media only screen and (max-width: 700px) {
   .menu{
-    display: none;
+    display: inline-block !important ;
+  }
+  
+  .navbar{
+    justify-content: space-between;
+    padding: 20px 0 0 0 ;
+  }
+  .navbar h1{
+    margin-left: 20px;
+  }
+  .navbar .links{
+    margin-right: 30px;
+  }
+  .navbar .button{
+    top: 5px;
+    right: 5px;
   }
 }

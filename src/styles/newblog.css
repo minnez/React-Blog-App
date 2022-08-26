@@ -50,3 +50,12 @@
     border: 0px;
     cursor: pointer;
 }
+
+
+.newblog-main .postt{
+    background-color: coral;
+    color: #fff;
+    border-radius: 20px;
+    padding: 6px 24px;
+
+}

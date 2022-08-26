@@ -1,36 +1,54 @@
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useContext } from "react";
+import { useContext, useEffect,useState } from "react";
 import { Link } from 'react-router-dom'
 import { IconButton } from '@mui/material';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import Profilemobile from "./Profilemobile"
 import SearchUsermobile from "./SearchUsermobile"
-import { useState } from "react";
+import { Usercontext } from "../contexts/Usercontext";
 
 const Navbar = () => {
     const { isLightTheme, light, dark,toggletheme } = useContext(ThemeContext)
     const theme = isLightTheme ? light : dark;
     // console.log("navigation.js")
 
-    const[profile, setprofile] = useState()
+    const {profile,fetchProfileDetails} = useContext(Usercontext)
+
+
+    const[profilee, setprofilee] = useState()
     const[searchuser, setsearchuser] = useState()
 
+    useEffect(()=> {
+        // console.log("profile.jsx")
+        fetchProfileDetails()
+    },[profile.uid])
 
     return ( 
         <div className="navbar" style={{backgroundColor: theme.ui, color: theme.syntax}}>
             <IconButton className="button" sx={{backgroundColor: theme.bg, color: theme.ui, margin:'5px'}} onClick={toggletheme} size='medium'>
-                { !isLightTheme && <LightModeOutlinedIcon sx={{color:"#ccc"}} fontSize='medium'></LightModeOutlinedIcon>}
-                {isLightTheme && <NightlightOutlinedIcon sx={{color:"#000"}} fontSize='medium'></NightlightOutlinedIcon>}
+                { !isLightTheme && <LightModeOutlinedIcon sx={{color:"#ccc"}} fontSize='small'></LightModeOutlinedIcon>}
+                {isLightTheme && <NightlightOutlinedIcon sx={{color:"#000"}} fontSize='small'></NightlightOutlinedIcon>}
             </IconButton>
             <h1>Blogs</h1>
             <div className="links">
-                <Link style={{color:theme.syntax,marginLeft:"20px"}} to="/">Home</Link>
+                <Link style={{color:theme.syntax,marginLeft:"20px"}} to="/">
+                    <IconButton sx={{backgroundColor: theme.bg, color: theme.ui, margin:'5px'}}size='medium'>
+                        <HomeOutlinedIcon sx={{color: theme.syntax}} fontSize='medium'></HomeOutlinedIcon> 
+                    </IconButton>
+                </Link>
                 {/* <Link style={{color:theme.syntax,marginLeft:"20px"}} to="/contactview">Contact</Link> */}
-                <button onClick={()=> setprofile(true)} className="menu">menu</button>
-                <button onClick={() => setsearchuser(true)} className="menu">search</button>
+                <IconButton  className="menu" onClick={()=> setprofilee(true)} sx={{backgroundColor: theme.bg, color: theme.ui, margin:'5px',height:'40px'}}size='medium' >
+                    <AccountCircleOutlinedIcon  sx={{color: theme.syntax}} fontSize='medium'></AccountCircleOutlinedIcon> 
+                </IconButton>
+                <IconButton className="menu" onClick={() => setsearchuser(true)} sx={{backgroundColor: theme.bg, color: theme.ui, margin:'5px',height:'40px'}}size='medium'>
+                    <SearchOutlinedIcon sx={{color: theme.syntax}} fontSize='medium'></SearchOutlinedIcon> 
+                </IconButton>
             </div>
-            { profile && <Profilemobile close={setprofile}/>}
+            { profilee && <Profilemobile close={setprofilee}/>}
             { searchuser && <SearchUsermobile close={setsearchuser}/>}
         </div>
      );

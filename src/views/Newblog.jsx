@@ -67,8 +67,8 @@ const Newblog = () => {
                  placeholder='add a new blog'  
                  cols="30" rows="12"
                  ></textarea>
-                  {!isPending && <button style={{backgroundColor: theme.bg, color: theme.syntax}}>post</button>}
-                  {isPending && <button style={{backgroundColor: theme.bg, color: theme.syntax}} disabled>posting ...</button>}
+                  {!isPending && <button className="postt" >post</button>}
+                  {isPending && <button className="postt"  disabled>posting ...</button>}
             </form>
         </div>
      );

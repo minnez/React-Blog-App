@@ -37,3 +37,35 @@
 .icons{
     margin: 5px;
 }
+.comment-message-box{
+    position: relative;
+}
+.comment-message-box textarea{
+    margin-top: 42px;
+    width: 100%;
+    min-height: 80px;
+    font-size: 1.1rem;
+    padding: 10px 20px;
+}
+.comment-message-box .close{
+    font-size:xx-large;
+    position: absolute;
+    top: 2px;
+    left: 10px;
+    cursor: pointer;
+    border: 0px;
+    height: 38px;
+    width: 38px;
+    border-radius: 50%;
+}
+.comment-message-box .comment-btn{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    cursor: pointer;
+    border: 0px;
+    padding: 8px 16px;
+    background-color: coral;
+    color: #fff;
+    border-radius: 15px;
+}
