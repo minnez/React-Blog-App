@@ -86,3 +86,17 @@
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
+
+@media only screen and (max-width: 700px) {
+
+  .grid-3-col{
+    display: block;
+    /* height: 100vh; */
+  }
+
+  .insidehome .addpost{
+    position: fixed;
+    bottom: 40px;
+    left: 75%;
+  }
+}

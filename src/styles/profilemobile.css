@@ -1,54 +1,62 @@
-.profile-main{
+.mprofile-main{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     padding-top: 40px;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    position: relative;
+    gap: 40px;
 }
-.profile-img{
+.mmm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.mprofile-img{
     width: 80px;
     height: 80px;
     border: 3px solid #000;
     border-radius: 50%;
     overflow: hidden;
     position: relative;
-    left: 10px;
+
+    margin-bottom: 20px;
 }
-.fol{
+.mfol{
     width: 100%;
     display: flex;
     justify-content: space-evenly;
-    flex-direction: column;
+    flex-direction: row;
     gap: 10px;
     font-size: 14px;
 }
-.profile-main button{
+.mprofile-main .mlogout{
     position: absolute;
     bottom: 20px;
     padding: 10px 30px;
     border: 0;
     cursor: pointer;
 }
-.profile-name{
+.mprofile-name{
     text-align: center;
     margin: 0;
     padding: 4px;
 }
-.profile-email{
+.mprofile-email{
     padding: 6px;
     font-size: 14px;
     color: #bbb;
     margin-bottom: 15px;
 }
-.folNum{
+.mfolNum{
     background-color: #b8b5b575;
     padding: 4px;
     border-radius: 4px;
     font-size: 16px;
-}
-@media only screen and (max-width: 700px) {
-    .profile-main{
-        display: none;
-    }
 }

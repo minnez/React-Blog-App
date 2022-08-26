@@ -1,20 +1,28 @@
-.main{
+.mmain{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     flex-direction: column;
-    position: relative;
     padding-top: 10px;
 }
-.main span{
+.mclose{
+    margin: 20px;
+}
+.mmain span{
     color: #888;
 }
-.main form{
+.mmain form{
     width: 100%;
     padding: 10px;
     
 }
-.main input {
+.mmain input {
     display: block;
     width: 90%;
     padding: 8px;
@@ -25,7 +33,7 @@
     outline: none;
 }
 
-.main button{
+.mmain .mbutton{
     display: block;
     text-align: center;
     font-size: 14px;
@@ -40,7 +48,7 @@
 button:hover{
     background-color: rgba(255, 255, 255, 0.105);
 }
-.userlist{
+.muserlist{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -63,8 +71,3 @@ button:hover{
     background-color: #a8bbbf;
   }
 
-@media only screen and (max-width: 700px) {
-    .main{
-        display: none;
-    }
-}
