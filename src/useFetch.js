@@ -1,37 +1,36 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-const useFetch = (url) =>{
+const useFetch = (url) => {
     const [data, setData] = useState(null);
     const [ispending, setIsPending] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() =>{
+    useEffect(() => {
         const abortCont = new AbortController();
-        fetch(url, {signal: abortCont.signal})
-            .then(res =>{
-                if(!res.ok){
-                    throw Error('could not fetch the data for that resource');
+        fetch(url, { signal: abortCont.signal })
+            .then((res) => {
+                if (!res.ok) {
+                    throw Error("could not fetch the data for that resource");
                 }
                 return res.json();
             })
-            .then(data => {
+            .then((data) => {
                 setData(data);
                 setIsPending(false);
                 setError(null);
             })
-            .catch(err => {
-                if (err.name === 'AbortError'){
-                    console.log('fetch aborted');
-                }else{
+            .catch((err) => {
+                if (err.name === "AbortError") {
+                    console.log("fetch aborted");
+                } else {
                     setIsPending(false);
                     setError(err.message);
                 }
-                
-            })
+            });
         return () => abortCont.abort();
-    },[url]);
+    }, [url]);
 
-    return{ data, ispending, error }
-}
+    return { data, ispending, error };
+};
 
-export default useFetch
+export default useFetch;

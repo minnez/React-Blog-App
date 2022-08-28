@@ -1,83 +1,91 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from "react";
 import {
     createUserWithEmailAndPassword,
     signInWithEmailAndPassword,
     signOut,
-    onAuthStateChanged
+    onAuthStateChanged,
 } from "firebase/auth";
-import {auth, db } from "../firebase-config"
-import { doc, setDoc, getDoc } from "firebase/firestore"
+import { auth, db } from "../firebase-config";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export const Usercontext = createContext();
 
 const UsercontextProvider = (prop) => {
-    const [profile, setProfile] = useState({})
-    const [currentUserName, setCurrentUserName] = useState()
-    const [profileDetails, setProfileDetails] = useState()
-    const [error, setError] = useState()
+    const [profile, setProfile] = useState({});
+    const [currentUserName, setCurrentUserName] = useState();
+    const [profileDetails, setProfileDetails] = useState();
+    const [error, setError] = useState();
 
-    const createUser = (email, password) =>{
-        return createUserWithEmailAndPassword(auth, email, password)
-    }
+    const createUser = (email, password) => {
+        return createUserWithEmailAndPassword(auth, email, password);
+    };
 
     const signIn = (email, password) => {
-        return signInWithEmailAndPassword(auth, email, password)
-    }
+        return signInWithEmailAndPassword(auth, email, password);
+    };
 
     const logout = () => {
-        return signOut(auth)
-    }
+        return signOut(auth);
+    };
 
-    const setUser = (name) =>{
+    const setUser = (name) => {
         // console.log("setting name")
-        setCurrentUserName(name)
-    }
-    
-    const writeUserData = async( name, email) => {
+        setCurrentUserName(name);
+    };
+
+    const writeUserData = async (name, email) => {
         await setDoc(doc(db, "profiles", auth.currentUser.uid), {
             username: name,
             email: email,
             userId: auth.currentUser.uid,
-            following:[],
-            followers: []
+            following: [],
+            followers: [],
         });
-    }
+    };
 
-    const fetchProfileDetails = async () =>{
+    const fetchProfileDetails = async () => {
         try {
             const docRef = doc(db, "profiles", auth.currentUser.uid);
             const docSnap = await getDoc(docRef);
             if (docSnap.exists()) {
-                setProfileDetails(docSnap.data())
-                
+                setProfileDetails(docSnap.data());
             } else {
                 // doc.data() will be undefined in this case
                 setError("No such document!");
             }
-            
         } catch (error) {
-            setError(error.message)
+            setError(error.message);
         }
-    }
+    };
 
-    useEffect(()=>{
+    useEffect(() => {
         // console.log("usercontext.js")
-        const unsubscribe = onAuthStateChanged(auth, (currentuser) =>{
+        const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
             // console.log(currentuser);
-            setProfile(currentuser)
+            setProfile(currentuser);
         });
         return () => {
             unsubscribe();
-        }
-    },[])
-    
+        };
+    }, []);
 
-    return ( 
-        
-        <Usercontext.Provider value={{createUser, profile, logout, signIn, writeUserData, setUser, currentUserName, fetchProfileDetails, profileDetails}}>
+    return (
+        <Usercontext.Provider
+            value={{
+                createUser,
+                profile,
+                logout,
+                signIn,
+                writeUserData,
+                setUser,
+                currentUserName,
+                fetchProfileDetails,
+                profileDetails,
+            }}
+        >
             {prop.children}
         </Usercontext.Provider>
-     );
-}
- 
+    );
+};
+
 export default UsercontextProvider;

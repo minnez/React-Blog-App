@@ -1,31 +1,31 @@
-.listview{
+.listview {
     margin: 0;
     padding: 0px;
     min-height: 100%;
     padding-bottom: 20px;
     position: relative;
 }
-.listview-child{
+.listview-child {
     padding: 20px 20px 0px 20px;
 }
-.listview .ownername{
+.listview .ownername {
     text-align: right;
-    font-size:medium;
+    font-size: medium;
     color: #aaa;
 }
-.listview .comment-title{
+.listview .comment-title {
     display: block;
     padding: 5px 20px;
     border-top: 1px solid #666;
     border-bottom: 1px solid #666;
     color: #bbb;
 }
-.commentss{
+.commentss {
     padding: 12px;
     /* margin: 4px; */
     border-bottom: 0.4px solid #666;
 }
-.listview .back{
+.listview .back {
     font-size: x-large;
     padding-top: -5px;
     position: absolute;
@@ -34,21 +34,21 @@
     border: 0px;
     cursor: pointer;
 }
-.icons{
+.icons {
     margin: 5px;
 }
-.comment-message-box{
+.comment-message-box {
     position: relative;
 }
-.comment-message-box textarea{
+.comment-message-box textarea {
     margin-top: 42px;
     width: 100%;
     min-height: 80px;
     font-size: 1.1rem;
     padding: 10px 20px;
 }
-.comment-message-box .close{
-    font-size:xx-large;
+.comment-message-box .close {
+    font-size: xx-large;
     position: absolute;
     top: 2px;
     left: 10px;
@@ -58,7 +58,7 @@
     width: 38px;
     border-radius: 50%;
 }
-.comment-message-box .comment-btn{
+.comment-message-box .comment-btn {
     position: absolute;
     top: 5px;
     right: 10px;
