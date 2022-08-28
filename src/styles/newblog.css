@@ -1,14 +1,13 @@
-.newblog-main{
+.newblog-main {
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     padding-top: 50px;
 }
-.newblog-main form{
+.newblog-main form {
     width: 100%;
     padding: 10px;
-    
 }
 .newblog-main input {
     display: block;
@@ -19,7 +18,7 @@
     border: 0px solid #777;
     /* border-radius: 5px; */
 }
-.newblog-main textarea{
+.newblog-main textarea {
     resize: none;
     display: block;
     width: 90%;
@@ -30,7 +29,7 @@
     /* border-radius: 5px; */
     font-family: inherit;
 }
-.newblog-main button{
+.newblog-main button {
     display: block;
     text-align: right;
     font-size: 20px;
@@ -41,8 +40,8 @@
     /* border-radius: 4px; */
     cursor: pointer;
 }
-.newblog-main .back{
-    font-size:40px;
+.newblog-main .back {
+    font-size: 40px;
     padding-top: -5px;
     position: absolute;
     top: 8px;
@@ -51,11 +50,9 @@
     cursor: pointer;
 }
 
-
-.newblog-main .postt{
+.newblog-main .postt {
     background-color: coral;
     color: #fff;
     border-radius: 20px;
     padding: 6px 24px;
-
 }

@@ -1,15 +1,14 @@
-.user-main{
+.user-main {
     width: 100%;
     max-width: 200px;
     display: flex;
     padding: 10px;
     /* border-bottom: 1px solid #ccc; */
 }
-.user-main span{
+.user-main span {
     width: 75%;
-
 }
-.user-main .follow-btn{
+.user-main .follow-btn {
     padding: 6px 20px;
     background-color: transparent;
     border: 1px solid coral;
@@ -18,7 +17,7 @@
     border-radius: 16px;
     letter-spacing: 1px;
 }
-.user-main button:hover{
+.user-main button:hover {
     background-color: coral;
     color: #fff;
 }
