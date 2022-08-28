@@ -1,4 +1,4 @@
-.mprofile-main{
+.mprofile-main {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -12,13 +12,13 @@
     flex-direction: column;
     gap: 40px;
 }
-.mmm{
+.mmm {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
-.mprofile-img{
+.mprofile-img {
     width: 80px;
     height: 80px;
     border: 3px solid #000;
@@ -28,7 +28,7 @@
 
     margin-bottom: 20px;
 }
-.mfol{
+.mfol {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -36,27 +36,31 @@
     gap: 10px;
     font-size: 14px;
 }
-.mprofile-main .mlogout{
+.mprofile-main .mlogout {
     position: absolute;
     bottom: 20px;
     padding: 10px 30px;
     border: 0;
     cursor: pointer;
 }
-.mprofile-name{
+.mprofile-name {
     text-align: center;
     margin: 0;
     padding: 4px;
 }
-.mprofile-email{
+.mprofile-email {
     padding: 6px;
     font-size: 14px;
     color: #bbb;
     margin-bottom: 15px;
 }
-.mfolNum{
+.mfolNum {
     background-color: #b8b5b575;
     padding: 4px;
     border-radius: 4px;
     font-size: 16px;
+    color: inherit;
+}
+.link-fix {
+    color: inherit;
 }

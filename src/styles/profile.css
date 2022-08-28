@@ -1,4 +1,4 @@
-.profile-main{
+.profile-main {
     padding-top: 40px;
     display: flex;
     justify-content: flex-start;
@@ -6,7 +6,7 @@
     flex-direction: column;
     position: relative;
 }
-.profile-img{
+.profile-img {
     width: 80px;
     height: 80px;
     border: 3px solid #000;
@@ -15,7 +15,7 @@
     position: relative;
     left: 10px;
 }
-.fol{
+.fol {
     width: 100%;
     display: flex;
     justify-content: space-evenly;
@@ -23,32 +23,36 @@
     gap: 10px;
     font-size: 14px;
 }
-.profile-main button{
+.profile-main button {
     position: absolute;
     bottom: 20px;
     padding: 10px 30px;
     border: 0;
     cursor: pointer;
 }
-.profile-name{
+.profile-name {
     text-align: center;
     margin: 0;
     padding: 4px;
 }
-.profile-email{
+.profile-email {
     padding: 6px;
     font-size: 14px;
     color: #bbb;
     margin-bottom: 15px;
 }
-.folNum{
+.folNum {
     background-color: #b8b5b575;
     padding: 4px;
     border-radius: 4px;
     font-size: 16px;
+    color: inherit;
+}
+.link-fix {
+    color: inherit;
 }
 @media only screen and (max-width: 700px) {
-    .profile-main{
+    .profile-main {
         display: none;
     }
 }

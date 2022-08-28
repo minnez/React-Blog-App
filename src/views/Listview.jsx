@@ -6,9 +6,6 @@ import "../styles/listview.css";
 import { IconButton } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import Comments from "../components/Comment";
 import {
     addDoc,
     getDocs,

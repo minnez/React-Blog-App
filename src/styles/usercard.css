@@ -1,11 +1,13 @@
 .user-main {
     width: 100%;
-    max-width: 200px;
+    max-width: 300px;
     display: flex;
     padding: 10px;
     /* border-bottom: 1px solid #ccc; */
 }
 .user-main span {
+    font-size: 1.1rem;
+    font-weight: 500;
     width: 75%;
 }
 .user-main .follow-btn {
@@ -14,6 +16,7 @@
     border: 1px solid coral;
     color: coral;
     font-size: 14px;
+    font-weight: 400;
     border-radius: 16px;
     letter-spacing: 1px;
 }

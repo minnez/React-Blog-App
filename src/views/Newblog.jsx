@@ -16,7 +16,6 @@ const Newblog = () => {
 
     const navigate = useNavigate();
     const [profileID, setprofileID] = useState();
-    const [profileName, setProfileName] = useState();
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [isPending, setisPending] = useState(false);
@@ -27,12 +26,17 @@ const Newblog = () => {
         // console.log("newblog.js")
         setprofileID(profile.uid);
         // console.log(profileDetails.username)
-        setProfileName(profileDetails.username);
-    }, [profile]);
+        // setProfileName(profileDetails.username);
+    }, [profile, profileDetails]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const blog = { profileID, title, body, profileName };
+        const blog = {
+            profileID,
+            title,
+            body,
+            profileName: profileDetails.username,
+        };
         setisPending(true);
 
         await addDoc(blogsCollectionRef, blog);

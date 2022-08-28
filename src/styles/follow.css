@@ -1,0 +1,30 @@
+.follow-main {
+    position: relative;
+    padding-top: 20px;
+}
+.follow-card {
+    padding: 10px 10px;
+    border-bottom: 0.5px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.follow-links {
+    width: 100%;
+    border-bottom: 1px solid coral;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.follow-links a {
+    color: inherit;
+    padding: 20px 30px;
+    text-transform: capitalize;
+    font-weight: 500;
+}
+.follow-links a:hover {
+    background-color: rgba(255, 127, 80, 0.157);
+}
+.follow-main .active {
+    border-bottom: 4px solid coral;
+}
