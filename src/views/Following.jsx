@@ -2,7 +2,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import Usercard from "../components/UserCard";
 import "../styles/follow.css";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 
 const Following = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext);
@@ -11,12 +11,21 @@ const Following = () => {
     // console.log("following");
     const navigate = useNavigate();
     const location = useLocation();
-    const { following, followers } = location.state;
-    console.log(following);
+    const { following, followers, returnPath } = location.state;
+    const [newArray, setNewArray] = useState();
 
     const goback = () => {
-        navigate(-1);
+        navigate(returnPath);
     };
+
+    useEffect(() => {
+        let newarray = [];
+
+        for (let i = following.length - 1; i >= 0; i--) {
+            newarray.push(following[i]);
+        }
+        setNewArray(newarray);
+    }, []);
 
     return (
         <div
@@ -38,22 +47,35 @@ const Following = () => {
                 <Link
                     className="active"
                     to={"/following"}
-                    state={{ following: following, followers: followers }}
+                    state={{
+                        following: following,
+                        followers: followers,
+                        returnPath: returnPath,
+                    }}
                 >
                     following
                 </Link>
                 <Link
                     to={"/followers"}
-                    state={{ followers: followers, following: following }}
+                    state={{
+                        followers: followers,
+                        following: following,
+                        returnPath: returnPath,
+                    }}
                 >
                     followers
                 </Link>
             </div>
-            {following.map((user) => (
-                <div className="follow-card" key={user.id}>
-                    <Usercard pid={user.id} pname={user.name} />
-                </div>
-            ))}
+            {!newArray && <div className="no-follow"> loading ...</div>}
+            {newArray &&
+                newArray.map((user) => (
+                    <div className="follow-card" key={user.id}>
+                        <Usercard pid={user.id} pname={user.name} />
+                    </div>
+                ))}
+            <div className="no-follow">
+                {following.length === 0 && <div>No users to show .</div>}
+            </div>
         </div>
     );
 };

@@ -28,3 +28,8 @@
 .follow-main .active {
     border-bottom: 4px solid coral;
 }
+.no-follow {
+    text-align: center;
+    font-size: larger;
+    padding: 40px 0px;
+}

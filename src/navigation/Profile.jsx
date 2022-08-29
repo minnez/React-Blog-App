@@ -36,7 +36,7 @@ const Profile = () => {
         >
             {!profileDetails && <span>loading...</span>}
             {profileDetails && (
-                <div>
+                <div className="flex-box">
                     <div className="profile-img">
                         <img width="80" src={Image} alt="efdffefdef" />
                     </div>
@@ -56,6 +56,7 @@ const Profile = () => {
                             state={{
                                 following: profileDetails.following,
                                 followers: profileDetails.followers,
+                                returnPath: "/",
                             }}
                         >
                             <div>
@@ -71,6 +72,7 @@ const Profile = () => {
                             state={{
                                 followers: profileDetails.followers,
                                 following: profileDetails.following,
+                                returnPath: "/",
                             }}
                         >
                             <div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/usercard.css";
 import { useContext } from "react";
 import { Usercontext } from "../contexts/Usercontext";
@@ -9,9 +9,8 @@ const UserCard = ({ pid, pname }) => {
     const { profile, fetchProfileDetails, profileDetails } =
         useContext(Usercontext);
 
-    console.log("usercard.js");
-
     const [isfollowed, setfollowed] = useState(false);
+
     const handlefollow = async () => {
         setfollowed(true);
 
@@ -45,7 +44,7 @@ const UserCard = ({ pid, pname }) => {
 
         const unfollowerRef = doc(db, "profiles", pid);
         // Atomically add a new follower to the "followers" of the user's array field.
-        console.log(profile.uid, profileDetails.username);
+        // console.log(profile.uid, profileDetails.username);
         await updateDoc(unfollowerRef, {
             followers: arrayRemove({
                 id: profile.uid,
@@ -54,6 +53,19 @@ const UserCard = ({ pid, pname }) => {
         });
         fetchProfileDetails();
     };
+
+    useEffect(() => {
+        // console.log(profileDetails.following);
+        // console.log("usercard.js");
+        if (profileDetails) {
+            const alreadyfollowed = profileDetails.following.map((user) => {
+                return user.id;
+            });
+            if (alreadyfollowed.includes(pid)) {
+                setfollowed(true);
+            }
+        }
+    }, [profileDetails]);
 
     return (
         <div className="user-main">
@@ -64,7 +76,10 @@ const UserCard = ({ pid, pname }) => {
                 </button>
             )}
             {isfollowed && (
-                <button className="follow-btn" onClick={handleunfollow}>
+                <button
+                    className="follow-btn follow-btn2"
+                    onClick={handleunfollow}
+                >
                     following
                 </button>
             )}

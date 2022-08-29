@@ -20,6 +20,10 @@
     border-radius: 16px;
     letter-spacing: 1px;
 }
+.user-main .follow-btn2 {
+    background-color: coral;
+    color: #fff;
+}
 .user-main button:hover {
     background-color: coral;
     color: #fff;

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useEffect, useContext } from "react";
-import { useNavigate, useParams, Link } from "react-router-dom";
+import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from "../contexts/Usercontext";
 import { db } from "../firebase-config";
@@ -13,6 +13,7 @@ const Aboutview = () => {
     const theme = isLightTheme ? light : dark;
     const { profileDetails } = useContext(Usercontext);
     const { id } = useParams();
+    const location = useLocation();
 
     const [aboutprofile, setaboutprofile] = useState();
     const [error, setError] = useState();
@@ -20,7 +21,6 @@ const Aboutview = () => {
     const goback = () => {
         navigate(-1);
     };
-
     const fetchProfileDetail = async () => {
         try {
             const docRef = doc(db, "profiles", id);
@@ -70,6 +70,7 @@ const Aboutview = () => {
                             className="link-fix"
                             to={"/following"}
                             state={{
+                                returnPath: location.pathname,
                                 following: aboutprofile.following,
                                 followers: aboutprofile.followers,
                             }}
@@ -83,6 +84,7 @@ const Aboutview = () => {
                             className="link-fix"
                             to={"/followers"}
                             state={{
+                                returnPath: location.pathname,
                                 followers: aboutprofile.followers,
                                 following: aboutprofile.following,
                             }}

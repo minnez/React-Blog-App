@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import UserCard from "../components/UserCard";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import "../styles/follow.css";
 
 const Followers = () => {
@@ -10,12 +10,22 @@ const Followers = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const { followers, following } = location.state;
-    console.log(followers);
+    const { followers, following, returnPath } = location.state;
+    const [newArray, setNewArray] = useState();
 
     const goback = () => {
-        navigate(-1);
+        navigate(returnPath);
     };
+
+    useEffect(() => {
+        let newarray = [];
+
+        for (let i = followers.length - 1; i >= 0; i--) {
+            newarray.push(followers[i]);
+        }
+        setNewArray(newarray);
+    }, []);
+
     return (
         <div
             className="follow-main"
@@ -35,29 +45,42 @@ const Followers = () => {
             <div className="follow-links">
                 <Link
                     to={"/following"}
-                    state={{ following: following, followers: followers }}
+                    state={{
+                        following: following,
+                        followers: followers,
+                        returnPath: returnPath,
+                    }}
                 >
                     following
                 </Link>
                 <Link
                     className="active"
                     to={"/followers"}
-                    state={{ following: following, followers: followers }}
+                    state={{
+                        following: following,
+                        followers: followers,
+                        returnPath: returnPath,
+                    }}
                 >
                     followers
                 </Link>
             </div>
 
             <div>
-                {followers.map((user) => (
-                    <div
-                        className="follow-card"
-                        key={user.id}
-                        style={{ borderBottom: "1px solid grey" }}
-                    >
-                        <UserCard pid={user.id} pname={user.name} />
-                    </div>
-                ))}
+                {!newArray && <div className="no-follow"> loading ...</div>}
+                {newArray &&
+                    newArray.map((user) => (
+                        <div
+                            className="follow-card"
+                            key={user.id}
+                            style={{ borderBottom: "1px solid grey" }}
+                        >
+                            <UserCard pid={user.id} pname={user.name} />
+                        </div>
+                    ))}
+            </div>
+            <div className="no-follow">
+                {followers.length === 0 && <div>No users to show .</div>}
             </div>
         </div>
     );
