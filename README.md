@@ -12,7 +12,7 @@ https://minnezblogs.netlify.app
 
 and
 
-https://minnezblog.on.fleek.co
+https://minnezblogs.on.fleek.co
 
 ## Available Scripts
 
