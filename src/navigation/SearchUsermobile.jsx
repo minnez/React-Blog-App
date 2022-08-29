@@ -34,9 +34,6 @@ const SearchUser = ({ close }) => {
             profileDetails.following.filter((user) =>
                 isFollowing.push(user.id)
             );
-            // console.log("is following",isFollowing)
-            // console.log("all profiles",userprofiles)
-            // console.log("profiledetails",profileDetails)
 
             //remove current user form list of all users and store rest in notFollowed
             const profilesExceptUser = userprofiles.filter(
@@ -94,6 +91,7 @@ const SearchUser = ({ close }) => {
                 ) : (
                     profiles.map((profiles) => (
                         <UserCard
+                            close={close}
                             key={profiles.id}
                             pid={profiles.id}
                             pname={profiles.username}

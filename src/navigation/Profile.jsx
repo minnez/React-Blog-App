@@ -41,7 +41,7 @@ const Profile = () => {
                         <img width="80" src={Image} alt="efdffefdef" />
                     </div>
                     <Link
-                        className="underline"
+                        className="underline link-fix"
                         to={"/aboutprofile/" + profileDetails.userId}
                     >
                         <h3 className="profile-name">

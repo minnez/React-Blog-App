@@ -2,6 +2,7 @@
     width: 100%;
     max-width: 300px;
     display: flex;
+    justify-content: space-between;
     padding: 10px;
     /* border-bottom: 1px solid #ccc; */
 }
@@ -19,6 +20,7 @@
     font-weight: 400;
     border-radius: 16px;
     letter-spacing: 1px;
+    margin: 0;
 }
 .user-main .follow-btn2 {
     background-color: coral;
@@ -27,4 +29,7 @@
 .user-main button:hover {
     background-color: coral;
     color: #fff;
+}
+.inherit {
+    color: inherit;
 }

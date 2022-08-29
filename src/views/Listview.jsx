@@ -111,7 +111,11 @@ const Listview = () => {
                 </button>
                 <h2>{blogTitle}</h2>
                 <p>{blogBody}</p>
-                <Link className="underline" to={"/aboutprofile/" + ownerId}>
+                <Link
+                    className="underline"
+                    to={"/aboutprofile/" + ownerId}
+                    state={{ back: location.pathname }}
+                >
                     <div className="ownername">{author}</div>
                 </Link>
                 <IconButton
@@ -198,6 +202,7 @@ const Listview = () => {
                             <Link
                                 className="underline"
                                 to={"/aboutprofile/" + comment.profileID}
+                                state={{ back: location.pathname }}
                             >
                                 <div className="ownername">
                                     {comment.profileName}

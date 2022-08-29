@@ -1,14 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import "../styles/usercard.css";
-import { useContext } from "react";
 import { Usercontext } from "../contexts/Usercontext";
 import { db } from "../firebase-config";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { Link, useLocation } from "react-router-dom";
 
-const UserCard = ({ pid, pname }) => {
+const UserCard = ({ pid, pname, close }) => {
     const { profile, fetchProfileDetails, profileDetails } =
         useContext(Usercontext);
-
+    const location = useLocation();
     const [isfollowed, setfollowed] = useState(false);
 
     const handlefollow = async () => {
@@ -67,9 +67,20 @@ const UserCard = ({ pid, pname }) => {
         }
     }, [profileDetails]);
 
+    const closeit = () => {
+        close && close(false);
+    };
+
     return (
         <div className="user-main">
-            <span>{pname}</span>
+            <Link
+                to={"/aboutprofile/" + pid}
+                state={{ back: location.pathname }}
+                onClick={closeit}
+                className="inherit"
+            >
+                <span>{pname}</span>
+            </Link>
             {!isfollowed && (
                 <button className="follow-btn" onClick={handlefollow}>
                     follow

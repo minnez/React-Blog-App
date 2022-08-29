@@ -57,7 +57,7 @@ const Profile = ({ close }) => {
                         <img width="80" src={Image} alt="efdffefdef" />
                     </div>
                     <Link
-                        className="munderline"
+                        className="munderline link-fix"
                         to={"/aboutprofile/" + profileDetails.userId}
                     >
                         <h3 className="mprofile-name">
@@ -73,6 +73,7 @@ const Profile = ({ close }) => {
                             state={{
                                 following: profileDetails.following,
                                 followers: profileDetails.followers,
+                                returnPath: "/",
                             }}
                         >
                             <div>
@@ -89,6 +90,7 @@ const Profile = ({ close }) => {
                             state={{
                                 followers: profileDetails.followers,
                                 following: profileDetails.following,
+                                returnPath: "/",
                             }}
                         >
                             <div>

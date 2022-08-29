@@ -14,12 +14,15 @@ const Aboutview = () => {
     const { profileDetails } = useContext(Usercontext);
     const { id } = useParams();
     const location = useLocation();
-
     const [aboutprofile, setaboutprofile] = useState();
     const [error, setError] = useState();
 
     const goback = () => {
-        navigate(-1);
+        if (location.state && location.state.back.includes("listview")) {
+            navigate(-1);
+        } else {
+            navigate("/");
+        }
     };
     const fetchProfileDetail = async () => {
         try {
@@ -38,12 +41,13 @@ const Aboutview = () => {
     };
 
     useEffect(() => {
-        if (profileDetails.userId === id) {
+        // console.log(location.state);
+        if (profileDetails && profileDetails.userId === id) {
             setaboutprofile(profileDetails);
         } else {
             fetchProfileDetail();
         }
-    }, []);
+    }, [profileDetails, id]);
 
     return (
         <div
