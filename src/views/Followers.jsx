@@ -70,11 +70,7 @@ const Followers = () => {
                 {!newArray && <div className="no-follow"> loading ...</div>}
                 {newArray &&
                     newArray.map((user) => (
-                        <div
-                            className="follow-card"
-                            key={user.id}
-                            style={{ borderBottom: "1px solid grey" }}
-                        >
+                        <div className="follow-card" key={user.id}>
                             <UserCard pid={user.id} pname={user.name} />
                         </div>
                     ))}
