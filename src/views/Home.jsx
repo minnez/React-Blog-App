@@ -3,7 +3,8 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import Book from "../components/Book";
 import { BlogContext } from "../contexts/BlogContext";
 import { Link } from "react-router-dom";
-
+import { IconButton } from "@mui/material";
+import PostAddOutlinedIcon from "@mui/icons-material/PostAddOutlined";
 const Home = () => {
     const { blogs } = useContext(BlogContext);
     const { isLightTheme, light, dark } = useContext(ThemeContext);
@@ -36,7 +37,19 @@ const Home = () => {
                 ))}
             </div>
             <Link className="addpost" to="/addblog">
-                {" "}
+                <IconButton
+                    sx={{
+                        backgroundColor: "coral",
+                        color: "#fff",
+                        margin: "8px",
+                    }}
+                    size="large"
+                >
+                    <PostAddOutlinedIcon
+                        sx={{ color: "#fff" }}
+                        fontSize="medium"
+                    ></PostAddOutlinedIcon>
+                </IconButton>
             </Link>
         </div>
     );

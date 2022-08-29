@@ -51,7 +51,7 @@
     width: 40px;
     height: 40px;
 }
-.insidehome .addpost::before {
+/* .insidehome .addpost::before {
     content: "+";
     height: 40px;
     width: 40px;
@@ -63,7 +63,7 @@
     font-weight: 500;
     font-family: courier;
     color: #fff;
-}
+} */
 /* .new{
   z-index: 5;
   position: absolute;
