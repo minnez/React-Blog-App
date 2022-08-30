@@ -21,6 +21,7 @@ const Booklist = (prop) => {
                 blogTitle: prop.title,
                 ownerId: prop.authorid,
                 author: prop.author,
+                blogTime: prop.createdAt,
             }}
         >
             <div
@@ -29,7 +30,10 @@ const Booklist = (prop) => {
             >
                 <h3>{prop.title}</h3>
                 <p>{prop.body.substring(0, 100) + "  . . ."}</p>
-                <span> ~ {prop.author}</span>
+                <div className="book-info">
+                    <span className="time">{prop.createdAt}</span>
+                    <span> ~ {prop.author}</span>
+                </div>
             </div>
         </Link>
     );

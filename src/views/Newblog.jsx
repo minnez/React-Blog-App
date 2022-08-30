@@ -4,7 +4,7 @@ import { BlogContext } from "../contexts/BlogContext";
 import { useContext, useState } from "react";
 import "../styles/newblog.css";
 import { useNavigate } from "react-router-dom";
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { useEffect } from "react";
 
@@ -36,6 +36,7 @@ const Newblog = () => {
             title,
             body,
             profileName: profileDetails.username,
+            createdAt: serverTimestamp(),
         };
         setisPending(true);
 

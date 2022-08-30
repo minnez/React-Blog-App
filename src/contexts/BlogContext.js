@@ -7,9 +7,7 @@ export const BlogContext = createContext();
 
 const BlogContextProvider = (prop) => {
     const { profile } = useContext(Usercontext);
-    const [blogs, setBlogs] = useState([
-        { title: "title", id: 9001, body: "initializing" },
-    ]);
+    const [blogs, setBlogs] = useState();
     const blogCollectionRef = collection(db, "blogs");
 
     const getPosts = async () => {

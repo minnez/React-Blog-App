@@ -13,7 +13,10 @@ const Home = () => {
 
     useEffect(() => {
         // console.log("home.js")
-        setBlogs(blogs);
+        if (blogs) {
+            console.log(blogs);
+            setBlogs(blogs);
+        }
     }, [blogs]);
 
     return (
@@ -33,6 +36,10 @@ const Home = () => {
                         id={blog.id}
                         authorid={blog.profileID}
                         author={blog.profileName}
+                        createdAt={blog.createdAt
+                            .toDate()
+                            .toString()
+                            .substring(0, 21)}
                     />
                 ))}
             </div>

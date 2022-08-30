@@ -54,12 +54,13 @@ li {
     /* margin: 10px auto; */
     padding: 5px 15px;
     text-align: left;
-    position: relative;
 }
-.book span {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+.book-info {
+    display: flex;
+    justify-content: space-between;
+}
+.book .time {
+    font-size: 12px;
 }
 .book li {
     font-size: 20px;
