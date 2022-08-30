@@ -50,12 +50,14 @@
     position: relative;
 }
 .comment-message-box textarea {
+    box-sizing: border-box;
     margin-top: 42px;
     width: 100%;
     min-height: 80px;
     font-size: 1.1rem;
     padding: 10px 20px;
     font-family: inherit;
+    resize: vertical;
 }
 .comment-message-box .close {
     font-size: xx-large;
