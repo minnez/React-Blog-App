@@ -14,6 +14,7 @@ import {
     query,
     where,
     deleteDoc,
+    serverTimestamp,
 } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { Usercontext } from "../contexts/Usercontext";
@@ -21,7 +22,8 @@ import { Usercontext } from "../contexts/Usercontext";
 const Listview = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const { oneblogId, blogTitle, blogBody, ownerId, author } = location.state;
+    const { oneblogId, blogTitle, blogBody, ownerId, author, blogTime } =
+        location.state;
 
     const [blogComments, setblogComments] = useState([]);
     const [error, setError] = useState();
@@ -43,7 +45,13 @@ const Listview = () => {
     const handlesubmit = async (e) => {
         e.preventDefault();
         const commentsCollectionRef = collection(db, "comments");
-        const comment = { body, blogID: oneblogId, profileID, profileName };
+        const comment = {
+            body,
+            blogID: oneblogId,
+            profileID,
+            profileName,
+            createdAt: serverTimestamp(),
+        };
         setisPending(true);
         await addDoc(commentsCollectionRef, comment);
         setisPending(false);
@@ -109,15 +117,24 @@ const Listview = () => {
                 >
                     &larr;
                 </button>
-                <h2>{blogTitle}</h2>
-                <p>{blogBody}</p>
-                <Link
-                    className="underline"
-                    to={"/aboutprofile/" + ownerId}
-                    state={{ back: location.pathname }}
-                >
-                    <div className="ownername">{author}</div>
-                </Link>
+                <h2 className="c-h">{blogTitle}</h2>
+                <p className="c-b">{blogBody}</p>
+                <div className="blog-info">
+                    <div
+                        className="time"
+                        style={{ backgroundColor: theme.drop, color: theme.li }}
+                    >
+                        <span>{blogTime}</span>
+                    </div>
+                    <Link
+                        className="underline"
+                        to={"/aboutprofile/" + ownerId}
+                        state={{ back: location.pathname }}
+                    >
+                        <div className="ownername">{author}</div>
+                    </Link>
+                </div>
+
                 <IconButton
                     sx={{
                         backgroundColor: theme.drop,
@@ -197,17 +214,37 @@ const Listview = () => {
                         comment,
                         index //checks if theres comments before rendering the comments
                     ) => (
-                        <div className="commentss" key={index}>
+                        <div
+                            className="commentss"
+                            style={{ borderColor: theme.li }}
+                            key={index}
+                        >
                             <p>{comment.body}</p>
-                            <Link
-                                className="underline"
-                                to={"/aboutprofile/" + comment.profileID}
-                                state={{ back: location.pathname }}
-                            >
-                                <div className="ownername">
-                                    {comment.profileName}
+                            <div className="comment-info">
+                                <div
+                                    className="time"
+                                    style={{
+                                        backgroundColor: theme.drop,
+                                        color: theme.li,
+                                    }}
+                                >
+                                    <span>
+                                        {comment.createdAt
+                                            .toDate()
+                                            .toString()
+                                            .substring(0, 21)}
+                                    </span>
                                 </div>
-                            </Link>
+                                <Link
+                                    className="underline"
+                                    to={"/aboutprofile/" + comment.profileID}
+                                    state={{ back: location.pathname }}
+                                >
+                                    <div className="ownername">
+                                        {comment.profileName}
+                                    </div>
+                                </Link>
+                            </div>
                         </div>
                     )
                 )}

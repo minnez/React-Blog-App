@@ -8,10 +8,16 @@
 .listview-child {
     padding: 20px 20px 0px 20px;
 }
+.c-h {
+    font-size: 22px;
+}
+.c-b {
+    font-size: 18px;
+}
 .listview .ownername {
     text-align: right;
-    font-size: medium;
-    color: #aaa;
+    font-size: 16px;
+    color: #888;
 }
 .listview .comment-title {
     display: block;
@@ -22,8 +28,11 @@
 }
 .commentss {
     padding: 12px;
-    /* margin: 4px; */
-    border-bottom: 0.4px solid #666;
+    font-weight: 400;
+    border-bottom: 0.2px solid;
+}
+.commentss > p {
+    font-size: 18px;
 }
 .listview .back {
     font-size: x-large;
@@ -68,4 +77,15 @@
     background-color: coral;
     color: #fff;
     border-radius: 15px;
+}
+.comment-info,
+.blog-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.comment-info .time,
+.blog-info .time {
+    padding-right: 16px;
+    font-size: 14px;
 }
