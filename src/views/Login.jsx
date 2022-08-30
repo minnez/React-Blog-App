@@ -6,11 +6,12 @@ import { IconButton } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import NightlightOutlinedIcon from "@mui/icons-material/NightlightOutlined";
 import "../styles/login.css";
+import { useEffect } from "react";
 const Login = () => {
     const { isLightTheme, light, dark, toggletheme } = useContext(ThemeContext);
     const theme = isLightTheme ? light : dark;
 
-    const { signIn } = useContext(Usercontext);
+    const { signIn, profile } = useContext(Usercontext);
 
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -34,6 +35,12 @@ const Login = () => {
             setisPending(false);
         }
     };
+
+    useEffect(() => {
+        if (profile) {
+            navigate("/");
+        }
+    });
 
     return (
         <div
