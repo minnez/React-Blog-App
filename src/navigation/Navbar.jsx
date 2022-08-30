@@ -29,7 +29,11 @@ const Navbar = () => {
     return (
         <div
             className="navbar"
-            style={{ backgroundColor: theme.ui, color: theme.syntax }}
+            style={{
+                backgroundColor: theme.ui,
+                color: theme.syntax,
+                borderColor: theme.li,
+            }}
         >
             <IconButton
                 className="button"

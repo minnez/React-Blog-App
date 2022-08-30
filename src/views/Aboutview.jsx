@@ -6,6 +6,7 @@ import { Usercontext } from "../contexts/Usercontext";
 import { db } from "../firebase-config";
 import { doc, getDoc } from "firebase/firestore";
 import "../styles/aboutview.css";
+import Image from "../images/pp.jpg";
 
 const Aboutview = () => {
     const navigate = useNavigate();
@@ -64,7 +65,19 @@ const Aboutview = () => {
             {!aboutprofile && <div className="loading">Loading...</div>}
             {aboutprofile && (
                 <div className="about-profile">
-                    <div className="about-profile-picture"></div>
+                    <div className="about-profile-picture">
+                        <img
+                            src={Image}
+                            alt="efdffefdef"
+                            style={{
+                                width: "130px",
+                                height: "130px",
+                                position: "relative",
+                                top: "-5px",
+                                left: "-5px",
+                            }}
+                        />
+                    </div>
                     <div className="about-name-email">
                         <div className="name">{aboutprofile.username}</div>
                         <div className="email">{aboutprofile.email}</div>
