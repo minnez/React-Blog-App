@@ -27,8 +27,8 @@
 }
 .middle {
     overflow-y: scroll;
-    border-right: 0.1px solid #777;
-    border-left: 0.1px solid #777;
+    border-right: 0.1px solid;
+    border-left: 0.1px solid;
 }
 .insidehome {
     position: relative;

@@ -1,7 +1,7 @@
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext, useEffect, useState } from "react";
 import "../styles/profile.css";
-import Image from "../images/pp2.jpg";
+import Image from "../images/pp.jpg";
 import { Usercontext } from "../contexts/Usercontext";
 import { useNavigate, Link } from "react-router-dom";
 
@@ -38,7 +38,17 @@ const Profile = () => {
             {profileDetails && (
                 <div className="flex-box">
                     <div className="profile-img">
-                        <img width="80" src={Image} alt="efdffefdef" />
+                        <img
+                            style={{
+                                width: "100px",
+                                height: "100px",
+                                position: "relative",
+                                top: "-5px",
+                                left: "-5px",
+                            }}
+                            src={Image}
+                            alt="efdffefdef"
+                        />
                     </div>
                     <Link
                         className="underline link-fix"

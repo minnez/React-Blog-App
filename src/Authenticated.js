@@ -25,7 +25,10 @@ const Authenticate = () => {
                     <Navbar />
                     <Profile />
                     <div
-                        style={{ backgroundColor: theme.drop }}
+                        style={{
+                            backgroundColor: theme.drop,
+                            borderColor: theme.li,
+                        }}
                         className="middle"
                     >
                         <Outlet />
