@@ -16,6 +16,7 @@
     font-size: 20px;
     margin: 10px auto;
     border: 0px solid #777;
+    outline: none;
     /* border-radius: 5px; */
 }
 .newblog-main textarea {
@@ -26,6 +27,7 @@
     font-size: 20px;
     margin: 10px auto;
     border: 0px solid #777;
+    outline: none;
     /* border-radius: 5px; */
     font-family: inherit;
 }

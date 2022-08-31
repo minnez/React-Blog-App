@@ -58,6 +58,7 @@
     padding: 10px 20px;
     font-family: inherit;
     resize: vertical;
+    outline: none;
 }
 .comment-message-box .close {
     font-size: xx-large;

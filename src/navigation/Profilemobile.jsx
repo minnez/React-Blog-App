@@ -6,6 +6,8 @@ import { IconButton } from "@mui/material";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { Usercontext } from "../contexts/Usercontext";
 import { useNavigate, Link } from "react-router-dom";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 
 const Profile = ({ close }) => {
     const { isLightTheme, light, dark } = useContext(ThemeContext);
@@ -13,6 +15,7 @@ const Profile = ({ close }) => {
     const { logout, profile, fetchProfileDetails, profileDetails, setUser } =
         useContext(Usercontext);
     const [error, setError] = useState();
+    const [confirmationBox, setconfirmationBox] = useState(false);
 
     const navigate = useNavigate();
 
@@ -105,12 +108,52 @@ const Profile = ({ close }) => {
             )}
 
             <button
-                onClick={handlelogout}
+                onClick={() => setconfirmationBox(true)}
                 className="mlogout"
                 style={{ backgroundColor: theme.bg, color: theme.syntax }}
             >
                 logout
             </button>
+
+            <Modal
+                open={confirmationBox}
+                onClose={() => setconfirmationBox(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        bgcolor: "background.paper",
+                        boxShadow: 24,
+                        p: 4,
+                        width: 200,
+                        border: "0px",
+                        outline: "0px",
+                    }}
+                >
+                    <div className="confirmation-box">
+                        <p>Continue to log out ?</p>
+                        <div className="confirmation-btns">
+                            <button
+                                onClick={() => setconfirmationBox(false)}
+                                className="btn cancel"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handlelogout}
+                                className="btn logout"
+                            >
+                                Log out
+                            </button>
+                        </div>
+                    </div>
+                </Box>
+            </Modal>
         </div>
     );
 };

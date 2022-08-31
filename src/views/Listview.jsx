@@ -6,6 +6,8 @@ import "../styles/listview.css";
 import { IconButton } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 import {
     addDoc,
     getDocs,
@@ -32,6 +34,7 @@ const Listview = () => {
     const [profileName, setProfileName] = useState();
     const [body, setBody] = useState();
     const [openComment, setOpenComment] = useState(false);
+    const [confirmationBox, setconfirmationBox] = useState(false);
 
     const { isLightTheme, light, dark } = useContext(ThemeContext);
     const theme = isLightTheme ? light : dark;
@@ -155,7 +158,7 @@ const Listview = () => {
                             margin: "5px",
                         }}
                         className="iconss"
-                        onClick={handledelete}
+                        onClick={() => setconfirmationBox(true)}
                         size="medium"
                     >
                         <DeleteOutlinedIcon fontSize="medium"></DeleteOutlinedIcon>
@@ -248,6 +251,46 @@ const Listview = () => {
                         </div>
                     )
                 )}
+
+            <Modal
+                open={confirmationBox}
+                onClose={() => setconfirmationBox(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+            >
+                <Box
+                    sx={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        bgcolor: "background.paper",
+                        boxShadow: 24,
+                        p: 4,
+                        width: 200,
+                        border: "0px",
+                        outline: "0px",
+                    }}
+                >
+                    <div className="confirmation-box">
+                        <p>Continue to delete post ?</p>
+                        <div className="confirmation-btns">
+                            <button
+                                onClick={() => setconfirmationBox(false)}
+                                className="btn cancel"
+                            >
+                                Cancel
+                            </button>
+                            <button
+                                onClick={handledelete}
+                                className="btn delete"
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </Box>
+            </Modal>
         </div>
     );
 };
