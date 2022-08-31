@@ -14,6 +14,10 @@ and
 
 https://minnezblogs.on.fleek.co
 
+## Download the Docker image on Docker Hub
+
+minnez/minnezblogs
+
 ## Available Scripts
 
 In the project directory, you can run:
