@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, useContext } from "react";
 import { Usercontext } from "../contexts/Usercontext";
 import { db } from "../firebase-config";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
 export const BlogContext = createContext();
 
@@ -11,7 +11,9 @@ const BlogContextProvider = (prop) => {
     const blogCollectionRef = collection(db, "blogs");
 
     const getPosts = async () => {
-        const data = await getDocs(blogCollectionRef);
+        const data = await getDocs(
+            query(blogCollectionRef, orderBy("createdAt", "desc"))
+        );
         // console.log(data.docs)
         setBlogs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
     };

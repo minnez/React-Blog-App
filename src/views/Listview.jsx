@@ -17,6 +17,7 @@ import {
     where,
     deleteDoc,
     serverTimestamp,
+    orderBy,
 } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { Usercontext } from "../contexts/Usercontext";
@@ -91,7 +92,11 @@ const Listview = () => {
     const fetchComments = async () => {
         // console.log("entered fetch comment")
         const commentsRef = collection(db, "comments");
-        const q = await query(commentsRef, where("blogID", "==", oneblogId));
+        const q = await query(
+            commentsRef,
+            where("blogID", "==", oneblogId),
+            orderBy("createdAt")
+        );
         const querySnapshot = await getDocs(q);
         // console.log("setting comments")
         setblogComments(

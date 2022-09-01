@@ -14,7 +14,7 @@ const Home = () => {
     useEffect(() => {
         // console.log("home.js")
         if (blogs) {
-            console.log(blogs);
+            // console.log(blogs);
             setBlogs(blogs);
         }
     }, [blogs]);
