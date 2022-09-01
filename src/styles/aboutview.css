@@ -64,3 +64,31 @@
 .link-fix {
     color: inherit;
 }
+.already-follows {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3;
+}
+.follow-state {
+    font-size: 10px;
+    padding: 4px 10px;
+    border-radius: 6px;
+    margin-right: 16px;
+}
+.unfollow {
+    padding: 8px 16px;
+    color: #fff;
+    background-color: coral;
+    border-radius: 16px;
+    font-size: 14px;
+    border: 1px solid coral;
+}
+.follow {
+    padding: 8px 16px;
+    color: coral;
+    border: 1px solid coral;
+    border-radius: 16px;
+    font-size: 14px;
+    background-color: transparent;
+}

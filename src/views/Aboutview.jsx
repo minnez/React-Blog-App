@@ -4,7 +4,13 @@ import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from "../contexts/Usercontext";
 import { db } from "../firebase-config";
-import { doc, getDoc } from "firebase/firestore";
+import {
+    doc,
+    getDoc,
+    updateDoc,
+    arrayUnion,
+    arrayRemove,
+} from "firebase/firestore";
 import "../styles/aboutview.css";
 import Image from "../images/pp.jpg";
 
@@ -12,11 +18,15 @@ const Aboutview = () => {
     const navigate = useNavigate();
     const { isLightTheme, light, dark } = useContext(ThemeContext);
     const theme = isLightTheme ? light : dark;
-    const { profileDetails } = useContext(Usercontext);
+    const { profileDetails, profile, fetchProfileDetails } =
+        useContext(Usercontext);
     const { id } = useParams();
     const location = useLocation();
     const [aboutprofile, setaboutprofile] = useState();
     const [error, setError] = useState();
+    const [isfollowed, setIsfollowed] = useState(false);
+    const [followstate, setFollowState] = useState(false);
+    const [isSameUser, setIsSameUser] = useState(false);
 
     const goback = () => {
         if (location.state && location.state.back.includes("listview")) {
@@ -41,10 +51,80 @@ const Aboutview = () => {
         }
     };
 
+    const handlefollow = async () => {
+        setIsfollowed(true);
+        const followRef = doc(db, "profiles", profile.uid);
+        // Atomically add a new follow to the "following" array field.
+        // console.log("name",pname, "id",pid)
+        await updateDoc(followRef, {
+            following: arrayUnion({
+                id: aboutprofile.userId,
+                name: aboutprofile.username,
+            }),
+        });
+
+        const followerRef = doc(db, "profiles", aboutprofile.userId);
+        // Atomically add a new follower to the "followers" of the user's array field.
+        // console.log(profile.uid, profileDetails.username)
+        await updateDoc(followerRef, {
+            followers: arrayUnion({
+                id: profile.uid,
+                name: profileDetails.username,
+            }),
+        });
+        fetchProfileDetails();
+    };
+
+    const handleunfollow = async () => {
+        setIsfollowed(false);
+
+        const unfollowRef = doc(db, "profiles", profile.uid);
+        // Atomically add a new follow to the "following" array field.
+        await updateDoc(unfollowRef, {
+            following: arrayRemove({
+                id: aboutprofile.userId,
+                name: aboutprofile.username,
+            }),
+        });
+
+        const unfollowerRef = doc(db, "profiles", aboutprofile.userId);
+        // Atomically add a new follower to the "followers" of the user's array field.
+        // console.log(profile.uid, profileDetails.username);
+        await updateDoc(unfollowerRef, {
+            followers: arrayRemove({
+                id: profile.uid,
+                name: profileDetails.username,
+            }),
+        });
+        fetchProfileDetails();
+    };
+
     useEffect(() => {
-        // console.log(location.state);
+        try {
+            const following = profileDetails.following.map((following) => {
+                return following.id;
+            });
+            const followers = profileDetails.followers.map((followers) => {
+                return followers.id;
+            });
+            if (followers.includes(id)) {
+                setFollowState(true);
+            } else {
+                setFollowState(false);
+            }
+            if (following.includes(id)) {
+                setIsfollowed(true);
+            }
+        } catch (error) {
+            setError(error.message);
+        }
+
+        // console.log(following);
+        // console.log(followers);
+
         if (profileDetails && profileDetails.userId === id) {
             setaboutprofile(profileDetails);
+            setIsSameUser(true);
         } else {
             fetchProfileDetail();
         }
@@ -82,6 +162,39 @@ const Aboutview = () => {
                         <div className="name">{aboutprofile.username}</div>
                         <div className="email">{aboutprofile.email}</div>
                     </div>
+                    {!isSameUser && (
+                        <div className="follow-hub">
+                            <div className="already-follows">
+                                {followstate && (
+                                    <span
+                                        style={{
+                                            backgroundColor: theme.bg,
+                                            color: theme.syntax,
+                                        }}
+                                        className="follow-state"
+                                    >
+                                        Follows you
+                                    </span>
+                                )}
+                                {isfollowed && (
+                                    <button
+                                        onClick={handleunfollow}
+                                        className="unfollow"
+                                    >
+                                        Following
+                                    </button>
+                                )}
+                                {!isfollowed && (
+                                    <button
+                                        onClick={handlefollow}
+                                        className="follow"
+                                    >
+                                        Follow
+                                    </button>
+                                )}
+                            </div>
+                        </div>
+                    )}
                     <div className="about-follows">
                         <Link
                             className="link-fix"
