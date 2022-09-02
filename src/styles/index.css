@@ -95,10 +95,25 @@ li {
         margin-left: 20px;
     }
     .navbar .links {
-        margin-right: 30px;
+        margin-right: 40px;
     }
     .navbar .button {
         top: 5px;
         right: 5px;
+    }
+}
+@media only screen and (max-width: 390px) {
+    .navbar .links {
+        width: 100px;
+    }
+}
+@media only screen and (max-width: 321px) {
+    .navbar .links {
+        width: 140px;
+    }
+}
+@media only screen and (max-width: 314px) {
+    .navbar .links {
+        width: 150px;
     }
 }
