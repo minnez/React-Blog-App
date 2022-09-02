@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from "../contexts/Usercontext";
+import Book from "../components/Book";
 import { db } from "../firebase-config";
 import {
     doc,
@@ -10,6 +11,11 @@ import {
     updateDoc,
     arrayUnion,
     arrayRemove,
+    collection,
+    query,
+    where,
+    getDocs,
+    orderBy,
 } from "firebase/firestore";
 import "../styles/aboutview.css";
 import Image from "../images/pp.jpg";
@@ -23,6 +29,7 @@ const Aboutview = () => {
     const { id } = useParams();
     const location = useLocation();
     const [aboutprofile, setaboutprofile] = useState();
+    const [profileBlogs, setProfileBlogs] = useState();
     const [error, setError] = useState();
     const [isfollowed, setIsfollowed] = useState(false);
     const [followstate, setFollowState] = useState(false);
@@ -49,6 +56,20 @@ const Aboutview = () => {
         } catch (error) {
             setError(error.message);
         }
+    };
+
+    const fetchProfileBlogs = async () => {
+        const profileblogsRef = collection(db, "blogs");
+        const q = await query(
+            profileblogsRef,
+            where("profileID", "==", id),
+            orderBy("createdAt", "desc")
+        );
+        const querySnapshot = await getDocs(q);
+        // console.log("setting comments")
+        setProfileBlogs(
+            querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
+        );
     };
 
     const handlefollow = async () => {
@@ -119,14 +140,13 @@ const Aboutview = () => {
             setError(error.message);
         }
 
-        // console.log(following);
-        // console.log(followers);
-
         if (profileDetails && profileDetails.userId === id) {
             setaboutprofile(profileDetails);
             setIsSameUser(true);
+            fetchProfileBlogs();
         } else {
             fetchProfileDetail();
+            fetchProfileBlogs();
         }
     }, [profileDetails, id]);
 
@@ -227,6 +247,43 @@ const Aboutview = () => {
                     </div>
                 </div>
             )}
+            <div className="profile-posts">
+                <div
+                    style={{
+                        backgroundColor: theme.drop,
+                        paddingTop: "3px",
+                        minHeight: "100%",
+                        borderTop: "0.2px solid",
+                        borderColor: theme.li,
+                        marginTop: "10px",
+                    }}
+                >
+                    {!profileBlogs && (
+                        <div className="no-posts">Loading ...</div>
+                    )}
+                    {profileBlogs && profileBlogs.length === 0 && (
+                        <div style={{ color: theme.li }} className="no-posts">
+                            No posts for this User
+                        </div>
+                    )}
+                    {profileBlogs &&
+                        profileBlogs.length > 0 &&
+                        profileBlogs.map((blog) => (
+                            <Book
+                                key={blog.id}
+                                title={blog.title}
+                                body={blog.body}
+                                id={blog.id}
+                                authorid={blog.profileID}
+                                author={blog.profileName}
+                                createdAt={blog.createdAt
+                                    .toDate()
+                                    .toString()
+                                    .substring(0, 21)}
+                            />
+                        ))}
+                </div>
+            </div>
         </div>
     );
 };
