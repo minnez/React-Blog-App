@@ -16,7 +16,8 @@ const Navbar = () => {
     const theme = isLightTheme ? light : dark;
     // console.log("navigation.js")
 
-    const { profile, fetchProfileDetails } = useContext(Usercontext);
+    const { profile, fetchProfileDetails, profileDetails } =
+        useContext(Usercontext);
 
     const [profilee, setprofilee] = useState();
     const [searchuser, setsearchuser] = useState();
@@ -58,7 +59,21 @@ const Navbar = () => {
                     ></NightlightOutlinedIcon>
                 )}
             </IconButton>
-            <h1>Blogs</h1>
+            <div className="blog-name">
+                <div style={{ fontWeight: "700" }}>MINNEZ BLOGS</div>
+                <div
+                    className="book-state"
+                    style={{
+                        backgroundColor: theme.bg,
+                        color: theme.syntax,
+                        fontSize: "12px",
+                        fontWeight: "400",
+                    }}
+                >
+                    {profileDetails && profileDetails.username}
+                </div>
+            </div>
+
             <div className="links">
                 <Link
                     style={{ color: theme.syntax, marginLeft: "20px" }}

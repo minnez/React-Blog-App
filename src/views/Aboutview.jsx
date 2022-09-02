@@ -275,6 +275,7 @@ const Aboutview = () => {
                                 body={blog.body}
                                 id={blog.id}
                                 authorid={blog.profileID}
+                                likes={blog.likes}
                                 author={blog.profileName}
                                 createdAt={blog.createdAt
                                     .toDate()

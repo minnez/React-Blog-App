@@ -62,6 +62,7 @@ const Profile = ({ close }) => {
                     <Link
                         className="munderline link-fix"
                         to={"/aboutprofile/" + profileDetails.userId}
+                        onClick={() => close(false)}
                     >
                         <h3 className="mprofile-name">
                             {profileDetails.username}

@@ -285,7 +285,9 @@ const Listview = () => {
                     <span style={{ color: theme.li }}>Likes</span>
                 </div>
                 <div className="comments-no">
-                    2 <span style={{ color: theme.li }}>Comments</span>
+                    {blogComments.length}
+                    {"  "}
+                    <span style={{ color: theme.li }}>Comments</span>
                 </div>
             </div>
             <span className="comment-title">comments</span>

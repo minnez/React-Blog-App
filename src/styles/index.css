@@ -79,6 +79,9 @@ li {
 .menu {
     display: none !important;
 }
+.blog-name {
+    padding-left: 20px;
+}
 @media only screen and (max-width: 700px) {
     .menu {
         display: inline-block !important ;
