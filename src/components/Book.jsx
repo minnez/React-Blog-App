@@ -28,7 +28,11 @@ const Booklist = (prop) => {
         >
             <div
                 className="book"
-                style={{ backgroundColor: theme.bg, color: theme.syntax }}
+                style={{
+                    backgroundColor: theme.drop,
+                    color: theme.syntax,
+                    borderColor: theme.li,
+                }}
             >
                 <h3>{prop.title}</h3>
                 <p>{prop.body.substring(0, 100) + "  . . ."}</p>
@@ -37,13 +41,16 @@ const Booklist = (prop) => {
                     <span> ~ {prop.author}</span>
                 </div>
                 <div
-                    style={{ backgroundColor: theme.drop, color: theme.li }}
+                    style={{ backgroundColor: theme.bg, color: theme.li }}
                     className="book-state"
                 >
                     <span style={{ color: theme.syntax }}>
                         {prop.likes.length}
                     </span>
-                    <FavoriteBorderOutlinedIcon fontSize="small"></FavoriteBorderOutlinedIcon>
+                    <FavoriteBorderOutlinedIcon
+                        sx={{ color: "coral" }}
+                        fontSize="small"
+                    ></FavoriteBorderOutlinedIcon>
                 </div>
             </div>
         </Link>

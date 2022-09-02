@@ -260,7 +260,10 @@ const Listview = () => {
                         className="iconss"
                         size="medium"
                     >
-                        <FavoriteIcon fontSize="medium"></FavoriteIcon>
+                        <FavoriteIcon
+                            sx={{ color: "coral" }}
+                            fontSize="medium"
+                        ></FavoriteIcon>
                     </IconButton>
                 )}
                 {profile.uid === ownerId && (

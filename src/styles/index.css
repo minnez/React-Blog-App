@@ -54,6 +54,7 @@ li {
     /* margin: 10px auto; */
     padding: 5px 15px;
     text-align: left;
+    border-bottom: 0.2px solid;
 }
 .book-info {
     display: flex;
