@@ -36,6 +36,7 @@ const Newblog = () => {
             title,
             body,
             profileName: profileDetails.username,
+            likes: [],
             createdAt: serverTimestamp(),
         };
         setisPending(true);

@@ -40,6 +40,7 @@ const UsercontextProvider = (prop) => {
             userId: auth.currentUser.uid,
             following: [],
             followers: [],
+            liked: [],
         });
     };
 

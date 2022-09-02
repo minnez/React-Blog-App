@@ -36,6 +36,7 @@ const Home = () => {
                         id={blog.id}
                         authorid={blog.profileID}
                         author={blog.profileName}
+                        likes={blog.likes}
                         createdAt={blog.createdAt
                             .toDate()
                             .toString()

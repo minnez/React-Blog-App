@@ -65,6 +65,17 @@ li {
 .book li {
     font-size: 20px;
 }
+.book-state {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: fit-content;
+    padding: 2px 10px;
+    border-radius: 6px;
+}
+.book-state span {
+    margin-right: 5px;
+}
 .menu {
     display: none !important;
 }

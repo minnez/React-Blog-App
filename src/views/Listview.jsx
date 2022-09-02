@@ -6,11 +6,14 @@ import "../styles/listview.css";
 import { IconButton } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
 import CommentOutlinedIcon from "@mui/icons-material/CommentOutlined";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import {
     addDoc,
     getDocs,
+    getDoc,
     doc,
     collection,
     query,
@@ -18,6 +21,9 @@ import {
     deleteDoc,
     serverTimestamp,
     orderBy,
+    updateDoc,
+    arrayUnion,
+    arrayRemove,
 } from "firebase/firestore";
 import { db } from "../firebase-config";
 import { Usercontext } from "../contexts/Usercontext";
@@ -28,6 +34,7 @@ const Listview = () => {
     const { oneblogId, blogTitle, blogBody, ownerId, author, blogTime } =
         location.state;
 
+    const [oneBlog, setOneBlog] = useState();
     const [blogComments, setblogComments] = useState([]);
     const [error, setError] = useState();
     const [isPending, setisPending] = useState(false);
@@ -36,11 +43,13 @@ const Listview = () => {
     const [body, setBody] = useState();
     const [openComment, setOpenComment] = useState(false);
     const [confirmationBox, setconfirmationBox] = useState(false);
+    const [Liked, setLiked] = useState(false);
 
     const { isLightTheme, light, dark } = useContext(ThemeContext);
     const theme = isLightTheme ? light : dark;
     const { getPosts } = useContext(BlogContext);
-    const { profile, profileDetails } = useContext(Usercontext);
+    const { profile, profileDetails, fetchProfileDetails } =
+        useContext(Usercontext);
 
     const goback = () => {
         navigate(-1);
@@ -104,12 +113,83 @@ const Listview = () => {
         );
         opencommentsetion();
     };
+    const fetchOneBlog = async () => {
+        try {
+            const docRef = doc(db, "blogs", oneblogId);
+            const docSnap = await getDoc(docRef);
+            if (docSnap.exists()) {
+                setOneBlog(docSnap.data());
+            } else {
+                // doc.data() will be undefined in this case
+                setError("No such document!");
+            }
+        } catch (error) {
+            setError(error.message);
+        }
+    };
+
+    const handlelike = async () => {
+        setLiked(true);
+
+        const likeRef = doc(db, "blogs", oneblogId);
+
+        await updateDoc(likeRef, {
+            likes: arrayUnion({
+                id: profile.uid,
+                name: profileDetails.username,
+            }),
+        });
+
+        const likerRef = doc(db, "profiles", profile.uid);
+
+        await updateDoc(likerRef, {
+            liked: arrayUnion(oneblogId),
+        });
+        fetchProfileDetails();
+        fetchOneBlog();
+        getPosts();
+        // console.log("liked");
+    };
+    const handleUnlike = async () => {
+        setLiked(false);
+
+        const unlikeRef = doc(db, "blogs", oneblogId);
+        await updateDoc(unlikeRef, {
+            likes: arrayRemove({
+                id: profile.uid,
+                name: profileDetails.username,
+            }),
+        });
+
+        const unlikerRef = doc(db, "profiles", profile.uid);
+
+        await updateDoc(unlikerRef, {
+            liked: arrayRemove(oneblogId),
+        });
+        fetchProfileDetails();
+        fetchOneBlog();
+        getPosts();
+        // console.log("unliked");
+    };
 
     useEffect(() => {
         //fetch request to get comments
         // console.log("listview.js")
-        fetchComments();
-        setprofileID(profile.uid);
+        if (profileDetails) {
+            fetchOneBlog();
+            fetchComments();
+            setprofileID(profile.uid);
+        }
+
+        try {
+            if (profileDetails.liked.includes(oneblogId)) {
+                setLiked(true);
+            } else {
+                setLiked(false);
+            }
+        } catch (error) {
+            setError(error.message);
+        }
     }, [oneblogId, profile, profileDetails]);
 
     return (
@@ -155,6 +235,34 @@ const Listview = () => {
                 >
                     <CommentOutlinedIcon fontSize="medium"></CommentOutlinedIcon>
                 </IconButton>
+                {!Liked && (
+                    <IconButton
+                        sx={{
+                            backgroundColor: theme.drop,
+                            color: theme.syntax,
+                            margin: "5px",
+                        }}
+                        onClick={handlelike}
+                        className="iconss"
+                        size="medium"
+                    >
+                        <FavoriteBorderOutlinedIcon fontSize="medium"></FavoriteBorderOutlinedIcon>
+                    </IconButton>
+                )}
+                {Liked && (
+                    <IconButton
+                        sx={{
+                            backgroundColor: theme.drop,
+                            color: theme.syntax,
+                            margin: "5px",
+                        }}
+                        onClick={handleUnlike}
+                        className="iconss"
+                        size="medium"
+                    >
+                        <FavoriteIcon fontSize="medium"></FavoriteIcon>
+                    </IconButton>
+                )}
                 {profile.uid === ownerId && (
                     <IconButton
                         sx={{
@@ -170,7 +278,16 @@ const Listview = () => {
                     </IconButton>
                 )}
             </div>
-
+            <div style={{ borderColor: theme.li }} className="blog-stats">
+                <div className="likes-no">
+                    {oneBlog && oneBlog.likes.length}
+                    {!oneBlog && 0}{" "}
+                    <span style={{ color: theme.li }}>Likes</span>
+                </div>
+                <div className="comments-no">
+                    2 <span style={{ color: theme.li }}>Comments</span>
+                </div>
+            </div>
             <span className="comment-title">comments</span>
             {openComment && (
                 <div className="comment-message-box">

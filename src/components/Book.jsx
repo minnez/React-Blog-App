@@ -1,5 +1,6 @@
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext, useEffect, useState } from "react";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import { Link } from "react-router-dom";
 
 const Booklist = (prop) => {
@@ -22,6 +23,7 @@ const Booklist = (prop) => {
                 ownerId: prop.authorid,
                 author: prop.author,
                 blogTime: prop.createdAt,
+                likes: prop.likes,
             }}
         >
             <div
@@ -33,6 +35,15 @@ const Booklist = (prop) => {
                 <div className="book-info">
                     <span className="time">{prop.createdAt}</span>
                     <span> ~ {prop.author}</span>
+                </div>
+                <div
+                    style={{ backgroundColor: theme.drop, color: theme.li }}
+                    className="book-state"
+                >
+                    <span style={{ color: theme.syntax }}>
+                        {prop.likes.length}
+                    </span>
+                    <FavoriteBorderOutlinedIcon fontSize="small"></FavoriteBorderOutlinedIcon>
                 </div>
             </div>
         </Link>
