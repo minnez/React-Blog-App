@@ -21,6 +21,7 @@
     border-radius: 16px;
     letter-spacing: 1px;
     margin: 0;
+    cursor: pointer;
 }
 .user-main .follow-btn2 {
     background-color: coral;

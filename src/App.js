@@ -10,6 +10,7 @@ import Authenticated from "./Authenticated";
 import Login from "./views/Login";
 import SignUp from "./views/SignUp";
 import Newblog from "./views/Newblog";
+import Liked from "./views/Liked";
 import UsercontextProvider from "./contexts/Usercontext";
 
 function App() {
@@ -47,6 +48,11 @@ function App() {
                                         exact
                                         path="/followers"
                                         element={<Followers />}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/likes/:id"
+                                        element={<Liked />}
                                     />
                                 </Route>
                             </Routes>

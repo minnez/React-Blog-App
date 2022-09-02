@@ -4,7 +4,7 @@
 }
 .follow-card {
     padding: 10px 10px;
-    border-bottom: 0.5px solid #ccc;
+    border-bottom: 0.2px solid;
     display: flex;
     justify-content: center;
     align-items: center;

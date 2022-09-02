@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import UserCard from "../components/UserCard";
 import { ThemeContext } from "../contexts/ThemeContext";
-import { useEffect, useState, useContext } from "react";
+import { useContext } from "react";
 import "../styles/liked.css";
 
 const Liked = () => {
@@ -10,21 +10,11 @@ const Liked = () => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    // const { followers, following, returnPath } = location.state;
-    const [newArray, setNewArray] = useState();
+    const { likeslist } = location.state;
 
     const goback = () => {
         navigate(-1);
     };
-
-    useEffect(() => {
-        let newarray = [];
-
-        for (let i = followers.length - 1; i >= 0; i--) {
-            newarray.push(followers[i]);
-        }
-        setNewArray(newarray);
-    }, []);
 
     return (
         <div
@@ -42,19 +32,24 @@ const Liked = () => {
             >
                 &larr;
             </button>
-            <div className="liked">Liked by</div>
-
+            <div style={{ borderColor: theme.li }} className="liked">
+                Liked by
+            </div>
             <div>
-                {!newArray && <div className="no-likes"> loading ...</div>}
-                {newArray &&
-                    newArray.map((user) => (
-                        <div className="follow-card" key={user.id}>
+                {!likeslist && <div className="no-likes"> loading ...</div>}
+                {likeslist &&
+                    likeslist.map((user) => (
+                        <div
+                            className="like-card"
+                            style={{ borderColor: theme.li }}
+                            key={user.id}
+                        >
                             <UserCard pid={user.id} pname={user.name} />
                         </div>
                     ))}
             </div>
-            <div className="no-follow">
-                {followers.length === 0 && <div>No likes yet .</div>}
+            <div className="no-likes">
+                {likeslist.length === 0 && <div>No likes yet .</div>}
             </div>
         </div>
     );

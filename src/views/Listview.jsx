@@ -279,11 +279,21 @@ const Listview = () => {
                 )}
             </div>
             <div style={{ borderColor: theme.li }} className="blog-stats">
-                <div className="likes-no">
-                    {oneBlog && oneBlog.likes.length}
-                    {!oneBlog && 0}{" "}
-                    <span style={{ color: theme.li }}>Likes</span>
-                </div>
+                {oneBlog && (
+                    <Link
+                        className="link-fix"
+                        to={"/likes/" + oneblogId}
+                        state={{
+                            likeslist: oneBlog.likes,
+                        }}
+                    >
+                        <div className="likes-no">
+                            {oneBlog && oneBlog.likes.length}
+                            {!oneBlog && 0}{" "}
+                            <span style={{ color: theme.li }}>Likes</span>
+                        </div>
+                    </Link>
+                )}
                 <div className="comments-no">
                     {blogComments.length}
                     {"  "}

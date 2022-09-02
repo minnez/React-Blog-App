@@ -1,0 +1,20 @@
+.liked-main {
+    position: relative;
+}
+.liked {
+    padding: 15px 80px;
+    border-bottom: 1px solid;
+    font-weight: 700;
+    font-size: large;
+}
+.no-likes {
+    padding: 20px;
+    text-align: center;
+}
+.like-card {
+    padding: 10px 10px;
+    border-bottom: 0.2px solid;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
