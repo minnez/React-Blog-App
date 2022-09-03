@@ -10,6 +10,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
+import Alert from "@mui/material/Alert";
 import {
     addDoc,
     getDocs,
@@ -47,7 +48,7 @@ const Listview = () => {
 
     const { isLightTheme, light, dark } = useContext(ThemeContext);
     const theme = isLightTheme ? light : dark;
-    const { getPosts } = useContext(BlogContext);
+    const { getPosts, showdelnotify } = useContext(BlogContext);
     const { profile, profileDetails, fetchProfileDetails } =
         useContext(Usercontext);
 
@@ -88,6 +89,7 @@ const Listview = () => {
         }
         getPosts();
         navigate(-1);
+        showdelnotify();
     };
     const opencommentsetion = () => {
         setOpenComment(!openComment);

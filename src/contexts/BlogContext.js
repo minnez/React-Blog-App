@@ -8,6 +8,8 @@ export const BlogContext = createContext();
 const BlogContextProvider = (prop) => {
     const { profile } = useContext(Usercontext);
     const [blogs, setBlogs] = useState();
+    const [notify, setnotify] = useState(false);
+    const [delnotify, setdelnotify] = useState(false);
     const blogCollectionRef = collection(db, "blogs");
 
     const getPosts = async () => {
@@ -16,6 +18,18 @@ const BlogContextProvider = (prop) => {
         );
         // console.log(data.docs)
         setBlogs(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
+    };
+    const shownotify = () => {
+        setnotify(true);
+        setTimeout(() => {
+            setnotify(false);
+        }, 3000);
+    };
+    const showdelnotify = () => {
+        setdelnotify(true);
+        setTimeout(() => {
+            setdelnotify(false);
+        }, 3000);
     };
     useEffect(() => {
         // console.log("blogcontext.js")
@@ -26,7 +40,16 @@ const BlogContextProvider = (prop) => {
     }, [db]);
 
     return (
-        <BlogContext.Provider value={{ blogs, getPosts }}>
+        <BlogContext.Provider
+            value={{
+                blogs,
+                getPosts,
+                shownotify,
+                notify,
+                showdelnotify,
+                delnotify,
+            }}
+        >
             {prop.children}
         </BlogContext.Provider>
     );

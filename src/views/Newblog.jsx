@@ -13,6 +13,7 @@ const Newblog = () => {
     const theme = isLightTheme ? light : dark;
     const { getPosts } = useContext(BlogContext);
     const { profile, profileDetails } = useContext(Usercontext);
+    const { shownotify } = useContext(BlogContext);
 
     const navigate = useNavigate();
     const [profileID, setprofileID] = useState();
@@ -48,6 +49,7 @@ const Newblog = () => {
         setBody("");
         setTitle("");
         navigate(-1);
+        shownotify();
     };
 
     const goback = () => {

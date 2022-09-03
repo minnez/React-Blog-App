@@ -69,6 +69,17 @@ const SearchUser = () => {
                 />
                 <button>Search</button>
             </form>
+            {!profileDetails && (
+                <div
+                    style={{
+                        padding: "20px",
+                        textAlign: "center",
+                        color: "#777",
+                    }}
+                >
+                    Loading ...
+                </div>
+            )}
             <div
                 className="userlist"
                 style={{ width: "90%", maxWidth: "400px" }}
