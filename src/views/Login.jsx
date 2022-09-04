@@ -75,6 +75,7 @@ const Login = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
+
                 <label htmlFor="pwd">Password</label>
                 <input
                     type="password"
@@ -92,7 +93,8 @@ const Login = () => {
                     </button>
                 )}
                 <span>
-                    Don't have an account?<Link to="/signup">sign up here</Link>
+                    Don't have an account?{" "}
+                    <Link to="/signup">sign up here</Link>
                 </span>
             </form>
         </div>

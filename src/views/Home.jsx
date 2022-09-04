@@ -23,42 +23,6 @@ const Home = () => {
 
     return (
         <div className="insidehome">
-            {notify && (
-                <Alert
-                    icon={false}
-                    sx={{
-                        textAlign: "center",
-                        color: "coral",
-                        border: "1px solid coral",
-                        position: "absolute",
-                        top: "20px",
-                        right: "20px",
-                        padding: "10px 60px",
-                        transition: "ease-out",
-                    }}
-                    severity="success"
-                >
-                    Blog succesfully created
-                </Alert>
-            )}
-            {delnotify && (
-                <Alert
-                    icon={false}
-                    sx={{
-                        textAlign: "center",
-                        color: "coral",
-                        border: "1px solid coral",
-                        position: "absolute",
-                        top: "20px",
-                        right: "20px",
-                        padding: "10px 60px",
-                        transition: "ease-out",
-                    }}
-                    severity="error"
-                >
-                    Deleted Blog succesfully
-                </Alert>
-            )}
             <div
                 style={{
                     backgroundColor: theme.drop,
@@ -66,6 +30,38 @@ const Home = () => {
                     minHeight: "100%",
                 }}
             >
+                <div className="notify">
+                    {notify && (
+                        <Alert
+                            icon={false}
+                            sx={{
+                                textAlign: "center",
+                                color: "coral",
+                                border: "1px solid coral",
+                                padding: "10px 60px",
+                                transition: "ease-out",
+                            }}
+                            severity="success"
+                        >
+                            Blog succesfully created
+                        </Alert>
+                    )}
+                    {delnotify && (
+                        <Alert
+                            icon={false}
+                            sx={{
+                                textAlign: "center",
+                                color: "coral",
+                                border: "1px solid coral",
+                                padding: "10px 60px",
+                                transition: "ease-out",
+                            }}
+                            severity="error"
+                        >
+                            Deleted Blog succesfully
+                        </Alert>
+                    )}
+                </div>
                 {!blogs && (
                     <div
                         style={{

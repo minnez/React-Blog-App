@@ -103,6 +103,16 @@ li {
         right: 5px;
     }
 }
+.notify {
+    position: sticky;
+    z-index: 3;
+    top: 20px;
+    right: 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 @media only screen and (max-width: 390px) {
     .navbar .links {
         width: 100px;
