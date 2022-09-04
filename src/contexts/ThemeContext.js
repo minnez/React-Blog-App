@@ -1,10 +1,9 @@
 import React, { createContext, Component } from "react";
 
 export const ThemeContext = createContext();
-
 class ThemeContextProvider extends Component {
     state = {
-        isLightTheme: true,
+        isLightTheme: localStorage.getItem("theme"),
         light: {
             syntax: "#555",
             ui: "#ddd",
@@ -23,7 +22,14 @@ class ThemeContextProvider extends Component {
         },
     };
     toggletheme = () => {
-        this.setState({ isLightTheme: !this.state.isLightTheme });
+        if (localStorage.getItem("theme") === "true") {
+            localStorage.removeItem("theme");
+            this.setState({ isLightTheme: false });
+        } else {
+            localStorage.setItem("theme", true);
+            this.setState({ isLightTheme: true });
+        }
+        // this.setState({ isLightTheme: !this.state.isLightTheme });
     };
 
     render() {
