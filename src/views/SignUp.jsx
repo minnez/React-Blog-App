@@ -19,24 +19,22 @@ const SignUp = () => {
     const [namenotok, setUsernameok] = useState();
     const [password, setPassword] = useState("");
     const [confirmpassword, setcpassword] = useState("");
-    const [error, setError] = useState("");
+    const [noEmail, setNoEmail] = useState();
+    const [emailNotFree, setEmailNotFree] = useState();
     const [isPending, setisPending] = useState(false);
     const [pwnok, setpwnok] = useState(false);
+    const [noNetwork, setNoNetwork] = useState();
 
     // console.log("signup.js")
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setError("");
+        if (name.length < 1) {
+            setUsernameok(true);
+        }
         if (password !== confirmpassword) {
-            if (name.length < 1) {
-                setUsernameok(true);
-            }
             setpwnok(true);
-            setTimeout(() => {
-                setpwnok(false);
-            }, 4000);
         } else {
             try {
                 setisPending(true);
@@ -46,7 +44,17 @@ const SignUp = () => {
                 // console.log("signed up")
                 navigate("/");
             } catch (e) {
-                setError(e.message);
+                if (e.message.includes("auth/network-request-failed")) {
+                    setNoNetwork(true);
+                }
+                // console.log(e.message);
+                if (e.message.includes("auth/missing-email")) {
+                    setNoEmail(true);
+                }
+                if (e.message.includes("auth/email-already-in-use")) {
+                    setEmailNotFree(true);
+                }
+                setisPending(false);
                 // console.log(e.message)
             }
         }
@@ -73,6 +81,23 @@ const SignUp = () => {
                     <NightlightOutlinedIcon fontSize="medium"></NightlightOutlinedIcon>
                 )}
             </IconButton>
+            <div style={{}}>
+                {noNetwork && (
+                    <Alert
+                        onClose={() => setNoNetwork(false)}
+                        sx={{
+                            textAlign: "center",
+                            color: "red",
+                            border: "1px solid red",
+                            padding: "0px 10px",
+                            transition: "ease-out",
+                        }}
+                        severity="error"
+                    >
+                        Check your internet connection
+                    </Alert>
+                )}
+            </div>
             <h2>Sign Up</h2>
             <form style={{ backgroundColor: theme.bg, color: theme.syntax }}>
                 <label htmlFor="email">Email</label>
@@ -85,6 +110,38 @@ const SignUp = () => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                 />
+                <div style={{ width: "96%", marginBottom: "20px" }}>
+                    {noEmail && (
+                        <Alert
+                            onClose={() => setNoEmail(false)}
+                            sx={{
+                                textAlign: "center",
+                                color: "red",
+                                border: "1px solid red",
+                                padding: "0px 10px",
+                                transition: "ease-out",
+                            }}
+                            severity="error"
+                        >
+                            invalid email
+                        </Alert>
+                    )}
+                    {emailNotFree && (
+                        <Alert
+                            onClose={() => setEmailNotFree(false)}
+                            sx={{
+                                textAlign: "center",
+                                color: "red",
+                                border: "1px solid red",
+                                padding: "0px 10px",
+                                transition: "ease-out",
+                            }}
+                            severity="error"
+                        >
+                            Email alreay in use
+                        </Alert>
+                    )}
+                </div>
                 <label htmlFor="username">Name</label>
                 <input
                     type="text"
@@ -171,6 +228,7 @@ const SignUp = () => {
                 <div style={{ width: "96%", marginBottom: "20px" }}>
                     {pwnok && (
                         <Alert
+                            onClose={() => setpwnok(false)}
                             sx={{
                                 textAlign: "center",
                                 color: "red",
@@ -186,10 +244,12 @@ const SignUp = () => {
                 </div>
                 {/* {!isPending && <button disabled>Join the community</button>} */}
                 {!isPending && confirmpassword.length >= 8 && (
-                    <button onClick={handleSubmit}>Join the community</button>
+                    <button className="log-btn" onClick={handleSubmit}>
+                        Join the community
+                    </button>
                 )}
                 {isPending && (
-                    <button onClick={handleSubmit} disabled>
+                    <button className="log-btn" disabled>
                         joining...
                     </button>
                 )}
