@@ -17,7 +17,7 @@ function App() {
     return (
         <Router>
             <div className="App">
-                <div>
+                <div style={{ height: "100vh" }}>
                     <ThemeContextProvider>
                         <UsercontextProvider>
                             <Routes basename="/minnez-blog-app.netlify.app">

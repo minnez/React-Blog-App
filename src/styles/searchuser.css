@@ -5,6 +5,7 @@
     flex-direction: column;
     position: relative;
     padding-top: 10px;
+    overflow: hidden;
 }
 .main span {
     color: #888;

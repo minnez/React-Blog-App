@@ -18,7 +18,7 @@
 .grid-3-col {
     display: grid;
     grid-template-columns: 20% 50% 30%;
-    grid-template-rows: 10% 90%;
+    grid-template-rows: 60px auto;
     height: 100vh;
 }
 .grid-3-col :first-child {

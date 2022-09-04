@@ -1,7 +1,7 @@
 .profile-main {
     padding-top: 40px;
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     position: relative;
@@ -23,8 +23,8 @@
     font-size: 14px;
 }
 .profile-main button {
-    position: absolute;
-    bottom: 20px;
+    margin-bottom: 20px;
+    margin-top: 30px;
     padding: 10px 30px;
     border: 0;
     cursor: pointer;
