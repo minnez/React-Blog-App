@@ -4,6 +4,7 @@ import {
     signInWithEmailAndPassword,
     signOut,
     onAuthStateChanged,
+    sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, db } from "../firebase-config";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -58,6 +59,23 @@ const UsercontextProvider = (prop) => {
             setError(error.message);
         }
     };
+    const resetPassword = (email) => {
+        sendPasswordResetEmail(auth, email)
+            .then(() => {
+                // Password reset email sent!
+                // ..
+            })
+            .catch((error) => {
+                console.log(error.message);
+                if (error.message.includes("auth/invalid-email")) {
+                    setError(true);
+                }
+                // ..
+            });
+    };
+    const serror = () => {
+        setError(!error);
+    };
 
     useEffect(() => {
         // console.log("usercontext.js")
@@ -82,6 +100,9 @@ const UsercontextProvider = (prop) => {
                 currentUserName,
                 fetchProfileDetails,
                 profileDetails,
+                resetPassword,
+                error,
+                serror,
             }}
         >
             {prop.children}

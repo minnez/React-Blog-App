@@ -5,6 +5,8 @@ import { useContext, useState } from "react";
 import { IconButton } from "@mui/material";
 import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
 import NightlightOutlinedIcon from "@mui/icons-material/NightlightOutlined";
+import Modal from "@mui/material/Modal";
+import Box from "@mui/material/Box";
 import Alert from "@mui/material/Alert";
 import "../styles/login.css";
 import { useEffect } from "react";
@@ -12,7 +14,7 @@ const Login = () => {
     const { isLightTheme, light, dark, toggletheme } = useContext(ThemeContext);
     const theme = isLightTheme ? light : dark;
 
-    const { signIn, profile } = useContext(Usercontext);
+    const { signIn, profile, resetPassword } = useContext(Usercontext);
 
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
@@ -23,7 +25,8 @@ const Login = () => {
     const [noNetwork, setNoNetwork] = useState();
     const [tryLater, setTryLater] = useState();
     const [isPending, setisPending] = useState(false);
-
+    const [reset, setReset] = useState(false);
+    const [resetEmail, setResetEmail] = useState("");
     // console.log("login.js")
 
     const handlelogin = async (e) => {
@@ -195,9 +198,55 @@ const Login = () => {
                         . . .
                     </button>
                 )}
+                <div
+                    style={{
+                        margin: "15px 0px",
+                        cursor: "pointer",
+                        color: "blue",
+                    }}
+                    onClick={() => setReset(true)}
+                >
+                    Forgot Password?{" "}
+                </div>
+                <Modal
+                    open={reset}
+                    onClose={() => setReset(false)}
+                    aria-labelledby="modal-modal-title"
+                    aria-describedby="modal-modal-description"
+                >
+                    <Box
+                        sx={{
+                            position: "absolute",
+                            top: "50%",
+                            left: "50%",
+                            transform: "translate(-50%, -50%)",
+                            bgcolor: "background.paper",
+                            boxShadow: 24,
+                            p: 2,
+                            width: 200,
+                            border: "0px",
+                            outline: "0px",
+                        }}
+                    >
+                        <div className="reset-box">
+                            <p>Enter your email</p>
+                            <input
+                                value={resetEmail}
+                                onChange={(e) => setResetEmail(e.target.value)}
+                                type="email"
+                                placeholder="Type your email"
+                            />
+
+                            <div className="reset-btns">
+                                <button onClick={resetPassword(resetEmail)}>
+                                    Send email
+                                </button>
+                            </div>
+                        </div>
+                    </Box>
+                </Modal>
                 <span>
-                    Don't have an account?{" "}
-                    <Link to="/signup">sign up here</Link>
+                    Don't have an account? <Link to="/signup">sign up</Link>
                 </span>
             </form>
         </div>

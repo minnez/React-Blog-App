@@ -39,3 +39,23 @@
     right: 25px;
     border-radius: 5px;
 }
+.reset-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.reset-box input {
+    padding: 8px 16px;
+    outline: none;
+}
+.reset-btns {
+    margin: 10px 0px;
+    display: flex;
+    justify-content: space-evenly;
+}
+.reset-btns button {
+    border: 1px solid coral;
+    padding: 8px 16px;
+    color: coral;
+}
