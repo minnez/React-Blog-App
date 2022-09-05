@@ -81,18 +81,22 @@ const UserCard = ({ pid, pname, close }) => {
             >
                 <span>{pname}</span>
             </Link>
-            {!isfollowed && (
-                <button className="follow-btn" onClick={handlefollow}>
-                    follow
-                </button>
-            )}
-            {isfollowed && (
-                <button
-                    className="follow-btn follow-btn2"
-                    onClick={handleunfollow}
-                >
-                    following
-                </button>
+            {profile.uid != pid && (
+                <div>
+                    {!isfollowed && (
+                        <button className="follow-btn" onClick={handlefollow}>
+                            follow
+                        </button>
+                    )}
+                    {isfollowed && (
+                        <button
+                            className="follow-btn follow-btn2"
+                            onClick={handleunfollow}
+                        >
+                            following
+                        </button>
+                    )}
+                </div>
             )}
         </div>
     );
