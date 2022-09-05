@@ -27,6 +27,7 @@ const Login = () => {
     const [isPending, setisPending] = useState(false);
     const [reset, setReset] = useState(false);
     const [resetEmail, setResetEmail] = useState("");
+    const [emailSent, setEmailSent] = useState(false);
     // console.log("login.js")
 
     const handlelogin = async (e) => {
@@ -57,9 +58,32 @@ const Login = () => {
             setisPending(false);
         }
     };
+    const handleResetPassword = async (e) => {
+        e.preventDefault();
+        if (!(resetEmail.includes("@") && resetEmail.includes(".com"))) {
+            setInvalidEmail(true);
+        } else {
+            // console.log(resetEmail);
+            try {
+                await resetPassword(resetEmail);
+                setResetEmail("");
+                setReset(false);
+                setEmailSent(true);
+            } catch (e) {
+                // console.log(e.message);
+                if (e.message.includes("auth/user-not-found")) {
+                    setNotFound(true);
+                }
+                if (e.message.includes("auth/invalid-email")) {
+                    setInvalidEmail(true);
+                }
+            }
+        }
+    };
 
     useEffect(() => {
         if (profile) {
+            console.log("here");
             navigate("/");
         }
     });
@@ -114,6 +138,21 @@ const Login = () => {
                         severity="error"
                     >
                         Too many Login attempts . Try again later
+                    </Alert>
+                )}
+                {emailSent && (
+                    <Alert
+                        onClose={() => setEmailSent(false)}
+                        sx={{
+                            textAlign: "center",
+                            color: "green",
+                            border: "1px solid green",
+                            padding: "0px 10px",
+                            transition: "ease-out",
+                        }}
+                        severity="success"
+                    >
+                        Email sent
                     </Alert>
                 )}
             </div>
@@ -228,8 +267,42 @@ const Login = () => {
                             outline: "0px",
                         }}
                     >
+                        <div style={{ width: "100%" }}>
+                            {inavlidemail && (
+                                <Alert
+                                    onClose={() => setInvalidEmail(false)}
+                                    sx={{
+                                        textAlign: "center",
+                                        color: "red",
+                                        border: "1px solid red",
+                                        padding: "0px 10px",
+                                        transition: "ease-out",
+                                    }}
+                                    severity="error"
+                                >
+                                    Invalid Email
+                                </Alert>
+                            )}
+                            {notFound && (
+                                <Alert
+                                    onClose={() => setNotFound(false)}
+                                    sx={{
+                                        textAlign: "center",
+                                        color: "red",
+                                        border: "1px solid red",
+                                        padding: "0px 10px",
+                                        transition: "ease-out",
+                                    }}
+                                    severity="error"
+                                >
+                                    User not found
+                                </Alert>
+                            )}
+                        </div>
                         <div className="reset-box">
-                            <p>Enter your email</p>
+                            <p style={{ fontWeight: "500" }}>
+                                Enter your email
+                            </p>
                             <input
                                 value={resetEmail}
                                 onChange={(e) => setResetEmail(e.target.value)}
@@ -238,7 +311,7 @@ const Login = () => {
                             />
 
                             <div className="reset-btns">
-                                <button onClick={resetPassword(resetEmail)}>
+                                <button onClick={handleResetPassword}>
                                     Send email
                                 </button>
                             </div>

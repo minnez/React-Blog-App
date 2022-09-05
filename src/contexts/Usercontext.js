@@ -60,21 +60,8 @@ const UsercontextProvider = (prop) => {
         }
     };
     const resetPassword = (email) => {
-        sendPasswordResetEmail(auth, email)
-            .then(() => {
-                // Password reset email sent!
-                // ..
-            })
-            .catch((error) => {
-                console.log(error.message);
-                if (error.message.includes("auth/invalid-email")) {
-                    setError(true);
-                }
-                // ..
-            });
-    };
-    const serror = () => {
-        setError(!error);
+        // console.log(email);
+        return sendPasswordResetEmail(auth, email);
     };
 
     useEffect(() => {
@@ -101,8 +88,6 @@ const UsercontextProvider = (prop) => {
                 fetchProfileDetails,
                 profileDetails,
                 resetPassword,
-                error,
-                serror,
             }}
         >
             {prop.children}
