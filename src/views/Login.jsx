@@ -83,7 +83,7 @@ const Login = () => {
 
     useEffect(() => {
         if (profile) {
-            console.log("here");
+            // console.log("here");
             navigate("/");
         }
     });
