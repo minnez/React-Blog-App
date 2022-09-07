@@ -113,7 +113,6 @@ const Listview = () => {
         setblogComments(
             querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
         );
-        opencommentsetion();
     };
     const fetchOneBlog = async () => {
         try {
@@ -225,18 +224,20 @@ const Listview = () => {
                     </Link>
                 </div>
 
-                <IconButton
-                    sx={{
-                        backgroundColor: theme.drop,
-                        color: theme.syntax,
-                        margin: "5px",
-                    }}
-                    className="iconss"
-                    onClick={opencommentsetion}
-                    size="medium"
-                >
-                    <CommentOutlinedIcon fontSize="medium"></CommentOutlinedIcon>
-                </IconButton>
+                {profileDetails && (
+                    <IconButton
+                        sx={{
+                            backgroundColor: theme.drop,
+                            color: theme.syntax,
+                            margin: "5px",
+                        }}
+                        className="iconss"
+                        onClick={opencommentsetion}
+                        size="medium"
+                    >
+                        <CommentOutlinedIcon fontSize="medium"></CommentOutlinedIcon>
+                    </IconButton>
+                )}
                 {!Liked && (
                     <IconButton
                         sx={{

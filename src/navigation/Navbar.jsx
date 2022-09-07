@@ -21,11 +21,13 @@ const Navbar = () => {
 
     const [profilee, setprofilee] = useState();
     const [searchuser, setsearchuser] = useState();
+    const [showMobilenav, setShowmobilenav] = useState(true);
 
     useEffect(() => {
         window.onscroll = function (e) {
             // print "false" if direction is down and "true" if up
-            console.log(this.oldScroll > this.scrollY);
+            // console.log(this.oldScroll > this.scrollY);
+            setShowmobilenav(this.oldScroll > this.scrollY);
             this.oldScroll = this.scrollY;
         };
         // console.log("profile.jsx")
@@ -34,7 +36,7 @@ const Navbar = () => {
 
     return (
         <div
-            className="navbar"
+            className={`navbar ${!showMobilenav && "shownav"}`}
             style={{
                 backgroundColor: theme.ui,
                 color: theme.syntax,

@@ -75,17 +75,27 @@
 @media only screen and (max-width: 700px) {
     .grid-3-col {
         display: block;
-        padding-top: 90px;
+        padding-top: 75px;
+        box-sizing: border-box;
     }
     .navbar {
+        z-index: 1;
+        transition: 0.4s ease-in-out;
         position: fixed;
         top: 0;
-        z-index: 1;
+    }
+    .shownav {
+        transform: translateY(-90px);
     }
 
     .insidehome .addpost {
         position: fixed;
         bottom: 40px;
         left: 75%;
+    }
+}
+@media only screen and (max-width: 350px) {
+    .grid-3-col {
+        padding-top: 90px;
     }
 }
