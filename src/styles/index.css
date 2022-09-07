@@ -31,7 +31,9 @@ li {
     border-bottom: 1px solid;
 }
 .navbar .links {
-    margin-left: 40px;
+    /* margin-left: 40px; */
+    min-width: 170px;
+    margin-right: 40px;
 }
 .navbar h1 {
     margin-left: -60px;
@@ -90,13 +92,10 @@ li {
 
     .navbar {
         justify-content: space-between;
-        padding: 20px 0 0 0;
+        padding: 20px 0 10px 0;
     }
     .navbar h1 {
         margin-left: 20px;
-    }
-    .navbar .links {
-        margin-right: 40px;
     }
     .navbar .button {
         top: 5px;
@@ -112,19 +111,4 @@ li {
     justify-content: center;
     align-items: center;
     width: 100%;
-}
-@media only screen and (max-width: 390px) {
-    .navbar .links {
-        width: 100px;
-    }
-}
-@media only screen and (max-width: 321px) {
-    .navbar .links {
-        width: 140px;
-    }
-}
-@media only screen and (max-width: 314px) {
-    .navbar .links {
-        width: 150px;
-    }
 }
