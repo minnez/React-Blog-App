@@ -14,6 +14,8 @@ import Newblog from "./views/Newblog";
 import Liked from "./views/Liked";
 import UsercontextProvider from "./contexts/Usercontext";
 import Alert from "@mui/material/Alert";
+import SearchUser from "./navigation/SearchUsermobile";
+import Profile from "./navigation/Profilemobile";
 
 function App() {
     // Online state
@@ -66,6 +68,16 @@ function App() {
                                 <Route path="/signup" element={<SignUp />} />
                                 <Route element={<Authenticated />}>
                                     <Route exact path="/" element={<Home />} />
+                                    <Route
+                                        exact
+                                        path="/mb-user"
+                                        element={<Profile />}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/mb-search"
+                                        element={<SearchUser />}
+                                    />
                                     <Route
                                         exact
                                         path="/addblog"

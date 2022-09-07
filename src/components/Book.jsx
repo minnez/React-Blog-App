@@ -14,6 +14,9 @@ const Booklist = (prop) => {
 
     return (
         <Link
+            onClick={() =>
+                sessionStorage.setItem("scrollPosition", window.pageYOffset)
+            }
             className="booka"
             to={"/listview/" + prop.id}
             state={{

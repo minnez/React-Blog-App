@@ -7,8 +7,6 @@ import NightlightOutlinedIcon from "@mui/icons-material/NightlightOutlined";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
-import Profilemobile from "./Profilemobile";
-import SearchUsermobile from "./SearchUsermobile";
 import { Usercontext } from "../contexts/Usercontext";
 
 const Navbar = () => {
@@ -19,8 +17,6 @@ const Navbar = () => {
     const { profile, fetchProfileDetails, profileDetails } =
         useContext(Usercontext);
 
-    const [profilee, setprofilee] = useState();
-    const [searchuser, setsearchuser] = useState();
     const [showMobilenav, setShowmobilenav] = useState(true);
 
     useEffect(() => {
@@ -100,41 +96,61 @@ const Navbar = () => {
                         ></HomeOutlinedIcon>
                     </IconButton>
                 </Link>
-                <IconButton
-                    className="menu"
-                    onClick={() => setprofilee(true)}
-                    sx={{
-                        backgroundColor: theme.bg,
-                        color: theme.ui,
-                        margin: "5px",
-                        height: "40px",
-                    }}
-                    size="medium"
+                <Link
+                    onClick={() =>
+                        sessionStorage.setItem(
+                            "scrollPosition",
+                            window.pageYOffset
+                        )
+                    }
+                    style={{ color: theme.syntax }}
+                    to="/mb-user"
                 >
-                    <AccountCircleOutlinedIcon
-                        sx={{ color: theme.syntax }}
-                        fontSize="medium"
-                    ></AccountCircleOutlinedIcon>
-                </IconButton>
-                <IconButton
-                    className="menu"
-                    onClick={() => setsearchuser(true)}
-                    sx={{
-                        backgroundColor: theme.bg,
-                        color: theme.ui,
-                        margin: "5px",
-                        height: "40px",
-                    }}
-                    size="medium"
+                    <IconButton
+                        className="menu"
+                        sx={{
+                            backgroundColor: theme.bg,
+                            color: theme.ui,
+                            margin: "5px",
+                            height: "40px",
+                        }}
+                        size="medium"
+                    >
+                        <AccountCircleOutlinedIcon
+                            sx={{ color: theme.syntax }}
+                            fontSize="medium"
+                        ></AccountCircleOutlinedIcon>
+                    </IconButton>
+                </Link>
+                <Link
+                    onClick={() =>
+                        sessionStorage.setItem(
+                            "scrollPosition",
+                            window.pageYOffset
+                        )
+                    }
+                    style={{ color: theme.syntax }}
+                    to="/mb-user"
                 >
-                    <SearchOutlinedIcon
-                        sx={{ color: theme.syntax }}
-                        fontSize="medium"
-                    ></SearchOutlinedIcon>
-                </IconButton>
+                    <IconButton
+                        className="menu"
+                        sx={{
+                            backgroundColor: theme.bg,
+                            color: theme.ui,
+                            margin: "5px",
+                            height: "40px",
+                        }}
+                        size="medium"
+                    >
+                        <SearchOutlinedIcon
+                            sx={{ color: theme.syntax }}
+                            fontSize="medium"
+                        ></SearchOutlinedIcon>
+                    </IconButton>
+                </Link>
             </div>
-            {profilee && <Profilemobile close={setprofilee} />}
-            {searchuser && <SearchUsermobile close={setsearchuser} />}
+            {/* {profilee && <Profilemobile close={setprofilee} />}
+            {searchuser && <SearchUsermobile close={setsearchuser} />} */}
         </div>
     );
 };

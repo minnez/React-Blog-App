@@ -9,7 +9,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 
-const Profile = ({ close }) => {
+const Profile = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext);
     const theme = isLightTheme ? light : dark;
     const { logout, profile, fetchProfileDetails, profileDetails, setUser } =
@@ -40,7 +40,7 @@ const Profile = ({ close }) => {
             style={{ backgroundColor: theme.drop, color: theme.syntax }}
         >
             <IconButton
-                onClick={() => close(false)}
+                onClick={() => navigate(-1)}
                 sx={{
                     backgroundColor: theme.bg,
                     color: theme.ui,
@@ -62,7 +62,6 @@ const Profile = ({ close }) => {
                     <Link
                         className="munderline link-fix"
                         to={"/aboutprofile/" + profileDetails.userId}
-                        onClick={() => close(false)}
                     >
                         <h3 className="mprofile-name">
                             {profileDetails.username}
@@ -72,7 +71,6 @@ const Profile = ({ close }) => {
                     <div className="mfol">
                         <Link
                             className="link-fix"
-                            onClick={() => close(false)}
                             to={"/following"}
                             state={{
                                 following: profileDetails.following,
@@ -89,7 +87,6 @@ const Profile = ({ close }) => {
                         </Link>
                         <Link
                             className="link-fix"
-                            onClick={() => close(false)}
                             to={"/followers"}
                             state={{
                                 followers: profileDetails.followers,
