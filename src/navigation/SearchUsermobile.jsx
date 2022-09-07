@@ -9,11 +9,13 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from "../contexts/Usercontext";
 import { useContext, useState, useEffect } from "react";
 import UserCard from "../components/UserCard";
+import { useNavigate } from "react-router-dom";
 
-const SearchUser = ({ close }) => {
+const SearchUser = () => {
     const { isLightTheme, light, dark } = useContext(ThemeContext);
     const theme = isLightTheme ? light : dark;
 
+    const navigate = useNavigate();
     const { profileDetails, profile } = useContext(Usercontext);
     const [profiles, setProfiles] = useState([]);
     const profilesCollectionRef = collection(db, "profiles");
@@ -60,7 +62,7 @@ const SearchUser = ({ close }) => {
             style={{ backgroundColor: theme.drop, color: theme.syntax }}
         >
             <IconButton
-                onClick={() => close(false)}
+                onClick={() => navigate(-1)}
                 sx={{
                     backgroundColor: theme.bg,
                     color: theme.ui,
@@ -91,7 +93,6 @@ const SearchUser = ({ close }) => {
                 ) : (
                     profiles.map((profiles) => (
                         <UserCard
-                            close={close}
                             key={profiles.id}
                             pid={profiles.id}
                             pname={profiles.username}

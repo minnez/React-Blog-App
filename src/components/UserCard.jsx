@@ -5,7 +5,7 @@ import { db } from "../firebase-config";
 import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
 import { Link, useLocation } from "react-router-dom";
 
-const UserCard = ({ pid, pname, close }) => {
+const UserCard = ({ pid, pname }) => {
     const { profile, fetchProfileDetails, profileDetails } =
         useContext(Usercontext);
     const location = useLocation();
@@ -67,16 +67,11 @@ const UserCard = ({ pid, pname, close }) => {
         }
     }, [profileDetails]);
 
-    const closeit = () => {
-        close && close(false);
-    };
-
     return (
         <div className="user-main">
             <Link
                 to={"/aboutprofile/" + pid}
                 state={{ back: location.pathname }}
-                onClick={closeit}
                 className="inherit"
             >
                 <span>{pname}</span>

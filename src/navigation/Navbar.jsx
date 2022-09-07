@@ -130,7 +130,7 @@ const Navbar = () => {
                         )
                     }
                     style={{ color: theme.syntax }}
-                    to="/mb-user"
+                    to="/mb-search"
                 >
                     <IconButton
                         className="menu"
@@ -149,8 +149,6 @@ const Navbar = () => {
                     </IconButton>
                 </Link>
             </div>
-            {/* {profilee && <Profilemobile close={setprofilee} />}
-            {searchuser && <SearchUsermobile close={setsearchuser} />} */}
         </div>
     );
 };

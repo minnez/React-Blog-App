@@ -14,6 +14,14 @@ const Home = () => {
     const [blogss, setBlogs] = useState([]);
 
     useEffect(() => {
+        // const handleScroll = () => {
+        //     sessionStorage.setItem("scrollPosition", window.pageYOffset);
+        //     console.log("put");
+        // };
+
+        // window.addEventListener("scroll", handleScroll);
+
+        // Remove listener when component unmounts
         // console.log("home.js")
         if (blogs) {
             // console.log(blogs);
@@ -25,6 +33,16 @@ const Home = () => {
             }
         }
     }, [blogs]);
+    // useEffect(
+    //     () => () => {
+    //         const handleScroll = () => {
+    //             sessionStorage.setItem("scrollPosition", window.pageYOffset);
+    //         };
+    //         console.log("unmount");
+    //         window.removeEventListener("scroll", handleScroll);
+    //     },
+    //     []
+    // );
 
     return (
         <div className="insidehome">
