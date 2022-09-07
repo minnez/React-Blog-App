@@ -12,6 +12,11 @@
     flex-direction: column;
     gap: 40px;
     overflow: scroll;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+.mprofile-main::-webkit-scrollbar {
+    display: none;
 }
 .mmm {
     display: flex;
