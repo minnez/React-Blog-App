@@ -23,6 +23,11 @@ const Navbar = () => {
     const [searchuser, setsearchuser] = useState();
 
     useEffect(() => {
+        window.onscroll = function (e) {
+            // print "false" if direction is down and "true" if up
+            console.log(this.oldScroll > this.scrollY);
+            this.oldScroll = this.scrollY;
+        };
         // console.log("profile.jsx")
         fetchProfileDetails();
     }, [profile.uid]);

@@ -75,7 +75,12 @@
 @media only screen and (max-width: 700px) {
     .grid-3-col {
         display: block;
-        /* height: 100vh; */
+        padding-top: 90px;
+    }
+    .navbar {
+        position: fixed;
+        top: 0;
+        z-index: 1;
     }
 
     .insidehome .addpost {
