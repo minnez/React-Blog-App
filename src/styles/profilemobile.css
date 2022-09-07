@@ -12,15 +12,7 @@
     flex-direction: column;
     gap: 40px;
     overflow: scroll;
-
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
 }
-/* Hide scrollbar for Chrome, Safari and Opera */
-.mprofile-main::-webkit-scrollbar {
-    display: none;
-}
-
 .mmm {
     display: flex;
     flex-direction: column;
