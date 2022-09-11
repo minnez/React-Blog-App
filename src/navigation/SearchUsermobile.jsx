@@ -19,6 +19,7 @@ const SearchUser = () => {
     const { profileDetails, profile } = useContext(Usercontext);
     const [profiles, setProfiles] = useState([]);
     const profilesCollectionRef = collection(db, "profiles");
+    const [searchValue, setSearchValue] = useState("");
     const [error, setError] = useState();
 
     const getAllProfiles = async () => {
@@ -81,8 +82,9 @@ const SearchUser = () => {
                     type="search"
                     placeholder="search for a user"
                     style={{ backgroundColor: theme.bg, color: theme.syntax }}
+                    value={searchValue}
+                    onChange={(e) => setSearchValue(e.target.value)}
                 />
-                <button className="mbutton">Search</button>
             </form>
             <div
                 className="muserlist"
@@ -90,14 +92,22 @@ const SearchUser = () => {
             >
                 {!profiles ? (
                     <div>No users to follow</div>
+                ) : profiles.filter((user) =>
+                      user.username.toLowerCase().includes(searchValue)
+                  ).length ? (
+                    profiles
+                        .filter((user) =>
+                            user.username.toLowerCase().includes(searchValue)
+                        )
+                        .map((profiles) => (
+                            <UserCard
+                                key={profiles.id}
+                                pid={profiles.id}
+                                pname={profiles.username}
+                            />
+                        ))
                 ) : (
-                    profiles.map((profiles) => (
-                        <UserCard
-                            key={profiles.id}
-                            pid={profiles.id}
-                            pname={profiles.username}
-                        />
-                    ))
+                    <div>No user found</div>
                 )}
             </div>
         </div>
