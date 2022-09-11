@@ -83,7 +83,9 @@ const SearchUser = () => {
                     placeholder="search for a user"
                     style={{ backgroundColor: theme.bg, color: theme.syntax }}
                     value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
+                    onChange={(e) =>
+                        setSearchValue(e.target.value.toLocaleLowerCase())
+                    }
                 />
             </form>
             <div
