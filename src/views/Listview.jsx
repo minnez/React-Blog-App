@@ -2,6 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { useLocation, useNavigate, Link } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { BlogContext } from "../contexts/BlogContext";
+import Loading from "../components/Loading/Loading";
 import "../styles/listview.css";
 import { IconButton } from "@mui/material";
 import DeleteOutlinedIcon from "@mui/icons-material/DeleteOutlined";
@@ -36,7 +37,7 @@ const Listview = () => {
         location.state;
 
     const [oneBlog, setOneBlog] = useState();
-    const [blogComments, setblogComments] = useState([]);
+    const [blogComments, setblogComments] = useState();
     const [error, setError] = useState();
     const [isPending, setisPending] = useState(false);
     const [profileID, setprofileID] = useState();
@@ -300,11 +301,13 @@ const Listview = () => {
                         </div>
                     </Link>
                 )}
-                <div className="comments-no">
-                    {blogComments.length}
-                    {"  "}
-                    <span style={{ color: theme.li }}>Comments</span>
-                </div>
+                {blogComments && (
+                    <div className="comments-no">
+                        {blogComments.length}
+                        {"  "}
+                        <span style={{ color: theme.li }}>Comments</span>
+                    </div>
+                )}
             </div>
             <span className="comment-title">comments</span>
             {openComment && (
@@ -346,12 +349,14 @@ const Listview = () => {
                     </form>
                 </div>
             )}
-            {!(blogComments.length > 0) && (
+            {!blogComments && <Loading></Loading>}
+            {blogComments && blogComments.length === 0 && (
                 <div style={{ padding: "20px", color: "#ccc" }}>
                     No comments yet
                 </div>
             )}
-            {blogComments.length > 0 &&
+            {blogComments &&
+                blogComments.length > 0 &&
                 blogComments.map(
                     (
                         comment,

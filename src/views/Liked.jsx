@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import Loading from "../components/Loading/Loading";
 import UserCard from "../components/UserCard";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext } from "react";
@@ -36,7 +37,7 @@ const Liked = () => {
                 Liked by
             </div>
             <div>
-                {!likeslist && <div className="no-likes"> loading ...</div>}
+                {!likeslist && <Loading></Loading>}
                 {likeslist &&
                     likeslist.map((user) => (
                         <div
