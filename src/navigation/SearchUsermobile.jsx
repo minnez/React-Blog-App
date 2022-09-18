@@ -8,6 +8,7 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from "../contexts/Usercontext";
 import { useContext, useState, useEffect } from "react";
+import Loading from "../components/Loading/Loading";
 import UserCard from "../components/UserCard";
 import { useNavigate } from "react-router-dom";
 
@@ -88,6 +89,7 @@ const SearchUser = () => {
                     }
                 />
             </form>
+            {!profileDetails && <Loading></Loading>}
             <div
                 className="muserlist"
                 style={{ width: "90%", maxWidth: "400px" }}

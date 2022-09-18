@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../contexts/ThemeContext";
 import Book from "../components/Book";
+import Loading from "../components/Loading/Loading";
 import { BlogContext } from "../contexts/BlogContext";
 import { Link } from "react-router-dom";
 import { IconButton } from "@mui/material";
@@ -85,17 +86,7 @@ const Home = () => {
                         </Alert>
                     )}
                 </div>
-                {!blogs && (
-                    <div
-                        style={{
-                            padding: "20px",
-                            textAlign: "center",
-                            color: "#777",
-                        }}
-                    >
-                        Loading blogs ...
-                    </div>
-                )}
+                {!blogs && <Loading></Loading>}
                 {blogss.map((blog) => (
                     <Book
                         key={blog.id}

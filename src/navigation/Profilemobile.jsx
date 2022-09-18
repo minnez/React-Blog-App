@@ -2,6 +2,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext, useEffect, useState } from "react";
 import "../styles/profilemobile.css";
 import Image from "../images/pp2.jpg";
+import Loading from "../components/Loading/Loading";
 import { IconButton } from "@mui/material";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { Usercontext } from "../contexts/Usercontext";
@@ -53,7 +54,7 @@ const Profile = () => {
                     fontSize="medium"
                 ></CloseOutlinedIcon>
             </IconButton>
-            {!profileDetails && <span>loading...</span>}
+            {!profileDetails && <Loading></Loading>}
             {profileDetails && (
                 <div className="mmm">
                     <div className="mprofile-img">

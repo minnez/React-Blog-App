@@ -3,6 +3,7 @@ import { useEffect, useContext } from "react";
 import { useNavigate, useParams, Link, useLocation } from "react-router-dom";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from "../contexts/Usercontext";
+import Loading from "../components/Loading/Loading";
 import Book from "../components/Book";
 import { db } from "../firebase-config";
 import {
@@ -162,7 +163,7 @@ const Aboutview = () => {
             >
                 &larr;
             </button>
-            {!aboutprofile && <div className="loading">Loading...</div>}
+            {!aboutprofile && <Loading></Loading>}
             {aboutprofile && (
                 <div className="about-profile">
                     <div className="about-profile-picture">
@@ -258,9 +259,7 @@ const Aboutview = () => {
                         marginTop: "10px",
                     }}
                 >
-                    {!profileBlogs && (
-                        <div className="no-posts">Loading ...</div>
-                    )}
+                    {!profileBlogs && <Loading></Loading>}
                     {profileBlogs && profileBlogs.length === 0 && (
                         <div style={{ color: theme.li }} className="no-posts">
                             No posts for this User

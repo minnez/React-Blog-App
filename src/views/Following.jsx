@@ -1,4 +1,5 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import Loading from "../components/Loading/Loading";
 import Usercard from "../components/UserCard";
 import "../styles/follow.css";
 import { ThemeContext } from "../contexts/ThemeContext";
@@ -66,7 +67,7 @@ const Following = () => {
                     followers
                 </Link>
             </div>
-            {!newArray && <div className="no-follow"> loading ...</div>}
+            {!newArray && <Loading> </Loading>}
             {newArray &&
                 newArray.map((user) => (
                     <div

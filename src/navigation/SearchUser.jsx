@@ -3,6 +3,7 @@ import "../styles/searchuser.css";
 import { db } from "../firebase-config";
 import { getDocs, collection } from "firebase/firestore";
 
+import Loading from "../components/Loading/Loading";
 import { ThemeContext } from "../contexts/ThemeContext";
 import { Usercontext } from "../contexts/Usercontext";
 import { useContext, useState, useEffect } from "react";
@@ -72,17 +73,7 @@ const SearchUser = () => {
                     }
                 />
             </form>
-            {!profileDetails && (
-                <div
-                    style={{
-                        padding: "20px",
-                        textAlign: "center",
-                        color: "#777",
-                    }}
-                >
-                    Loading ...
-                </div>
-            )}
+            {!profileDetails && <Loading></Loading>}
             <div
                 className="userlist"
                 style={{ width: "90%", maxWidth: "400px" }}

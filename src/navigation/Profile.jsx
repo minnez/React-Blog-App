@@ -2,6 +2,7 @@ import { ThemeContext } from "../contexts/ThemeContext";
 import { useContext, useEffect, useState } from "react";
 import "../styles/profile.css";
 import Image from "../images/pp.jpg";
+import Loading from "../components/Loading/Loading";
 import { Usercontext } from "../contexts/Usercontext";
 import { useNavigate, Link } from "react-router-dom";
 import Modal from "@mui/material/Modal";
@@ -36,7 +37,7 @@ const Profile = () => {
             className="profile-main"
             style={{ backgroundColor: theme.drop, color: theme.syntax }}
         >
-            {!profileDetails && <span>loading...</span>}
+            {!profileDetails && <Loading></Loading>}
             {profileDetails && (
                 <div className="flex-box">
                     <div className="profile-img">
